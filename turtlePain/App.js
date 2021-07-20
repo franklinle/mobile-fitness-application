@@ -23,4 +23,8 @@ export default function App() {
   );
 }
 
-ScreensFolder: GoalsScreen.js, HomeScreen.js, MyWorkoutsScreen.js, ProfileScreen.js, SearchScreen.js
+ScreensFolder: GoalsScreen.js,
+  HomeScreen.js,
+  MyWorkoutsScreen.js,
+  ProfileScreen.js,
+  SearchScreen.js;
