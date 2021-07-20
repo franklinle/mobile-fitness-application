@@ -4,7 +4,7 @@ import { Text, View } from "react-native";
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Goals</Text>
+      <Text style={styles.title}>Home</Text>
       <View
         style={styles.separator}
         lightColor="#eee"
