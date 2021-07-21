@@ -8,6 +8,7 @@ import MyWorkoutsScreen from "./screens/MyWorkoutsScreen";
 import SearchScreen from "./screens/SearchScreen";
 import HomeScreen from "./screens/HomeScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
+
 const Tab = createBottomTabNavigator();
 export default function App() {
   return (
