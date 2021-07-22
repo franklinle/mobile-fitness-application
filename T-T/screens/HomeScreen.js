@@ -1,6 +1,7 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
+// import { newQuiz } from "../bB/quiz";
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
@@ -10,6 +11,7 @@ export default function HomeScreen() {
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
+      {/* <Button onPress={() => newQuiz()} title="Update DataBase" /> */}
     </View>
   );
 }
