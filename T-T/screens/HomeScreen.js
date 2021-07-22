@@ -1,10 +1,21 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { Text, View } from "react-native";
+import { Text, View, Button, Alert } from "react-native";
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home</Text>
+      <Button
+        title="Sign up"
+        color="#f194ff"
+        onPress={() => Alert.alert("I love burritos")}
+      />
+      <Text> </Text>
+      <Button
+        title="Sign in"
+        color="#f194ff"
+        onPress={() => Alert.alert("I love tacos")}
+      />
       <View
         style={styles.separator}
         lightColor="#eee"
