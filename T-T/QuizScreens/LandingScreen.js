@@ -10,7 +10,7 @@ import { StyleSheet, Text, View, Button, ImageBackground} from 'react-native';
 export function LandingScreen(){
     return(
         <View style ={styles.container}>
-            <ImageBackground source = {require('./LandingScreen.png')} resizeMode ="cover" style={styles.images}>
+            <ImageBackground source = {require('./logo.png')} resizeMode ="cover" style={styles.images}>
                 <View style ={styles.button}>
                 <Button title= "Begin your fitness journey!"  />
                 <Button title="-Log in-"  /> 
