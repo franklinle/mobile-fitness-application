@@ -1,25 +1,23 @@
 import * as React from "react";
+import { Button, View, Text } from "react-native";
 import { StyleSheet } from "react-native";
-import { Text, View, Button, Alert } from "react-native";
-export default function HomeScreen() {
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import LandingPage from "./App";
+import AppHome from "./AppHome";
+
+export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
+      <Text>Login Screen</Text>
       <Button
-        title="Buttons are sick"
-        color="#f194ff"
-        onPress={() => Alert.alert("I love burritos")}
+        title="Go to Landing Page"
+        onPress={() => navigation.navigate("LandingPage")}
       />
       <Text> </Text>
       <Button
-        title="Buttons are cool"
-        color="#f194ff"
-        onPress={() => Alert.alert("I love tacos")}
-      />
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
+        title="AppHome(with bottom nav)"
+        onPress={() => navigation.navigate("AppHome")}
       />
     </View>
   );
