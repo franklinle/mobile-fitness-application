@@ -53,9 +53,9 @@ export default function AppHome() {
         name="Goals"
         component={GoalsScreen}
         options={{
-          tabBarLabel: "Goals",
+          tabBarLabel: "Clock",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="calendar" color={color} size={26} />
+            <MaterialCommunityIcons name="clock" color={color} size={26} />
           ),
         }}
       />

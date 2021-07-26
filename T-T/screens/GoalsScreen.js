@@ -1,18 +1,30 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { Text, View } from "react-native";
-export default function GoalsScreen() {
+import { Text, View, Button } from "react-native";
+import HomeScreen from "./HomeScreen";
+import ProfileScreen from "./ProfileScreen";
+import Timer from "./Timer";
+import Stopwatch from "./Stopwatch";
+import Reminders from "./Reminders";
+import SearchScreen from "./SearchScreen";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const Tab = createMaterialTopTabNavigator();
+
+function GoalsScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Goals</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-    </View>
+    <Tab.Navigator initialRouteName="Reminders">
+      <Tab.Screen name="Reminders" component={Reminders} />
+      <Tab.Screen name="Timer" component={Timer} />
+      <Tab.Screen name="Stopwatch" component={Stopwatch} />
+    </Tab.Navigator>
   );
 }
+
+export default GoalsScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
