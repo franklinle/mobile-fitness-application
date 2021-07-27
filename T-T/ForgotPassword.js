@@ -4,39 +4,36 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LandingPage from "./App";
-
 export default function Register({ navigation }) {
   return (
     <View style={styles.container}>
-      <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
-      <Text style={styles.title}> turtlGainz</Text>
+      <Image
+        source={require("../T-T/assets/lockLogo.png")}
+        style={styles.pic}
+      />
+      <View style={styles.stateBox}>
+        <Text style={styles.statement}>
+          Enter your email to receive a link to
+        </Text>
+        <Text style={styles.statement}>recover and reset your password.</Text>
+      </View>
       <TextInput placeholder="Email" style={styles.input} />
-      <TextInput placeholder="Username" style={styles.input} />
-      <TextInput placeholder="Password" style={styles.input} />
-      <TextInput placeholder="Confirm password" style={styles.input} />
       <Pressable style={styles.box}>
-        <Text style={styles.signUp}> Sign up </Text>
+        <Text style={styles.signUp}> Send Link</Text>
       </Pressable>
       <Text style={styles.seperator}>
-        {" "}
         -------------------------------------------- OR
         ---------------------------------------------
       </Text>
+      <Pressable style={styles.createBox}>
+        <Text style={styles.create}> Create an account </Text>
+      </Pressable>
       <Pressable style={styles.box}>
         <Text style={styles.signUp}> Log in with Google </Text>
       </Pressable>
       <Pressable>
         <Text style={styles.signUp2}> Sign up </Text>
       </Pressable>
-      {/* <Button
-        title="Start Quiz?"
-        //onPress={() => navigation.navigate("LandingPage")}
-      />
-      <Text> </Text>
-      <Button
-        title="Go to Landing Page"
-        onPress={() => navigation.navigate("LandingPage")}
-      /> */}
     </View>
   );
 }
@@ -53,11 +50,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 30,
   },
-  title: {
-    fontSize: 40,
-    fontWeight: "bold",
+  statement: {
     color: "#37686D",
-    marginBottom: 30,
+    fontSize: 20,
+  },
+  stateBox: {
+    paddingBottom: 30,
+    width: 400,
+    alignItems: "center",
   },
   input: {
     borderRadius: 10,
@@ -89,7 +89,14 @@ const styles = StyleSheet.create({
   },
   seperator: {
     color: "#37686D",
-    paddingTop: 70,
+    paddingTop: 145,
+    paddingBottom: 30,
+  },
+  create: {
+    fontSize: 30,
+    color: "white",
+  },
+  createBox: {
     paddingBottom: 30,
   },
 });
