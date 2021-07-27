@@ -10,20 +10,29 @@ import SearchScreen from "./SearchScreen";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import {
+  SafeAreaView,
+  SafeAreaProvider,
+  SafeAreaInsetsContext,
+  useSafeAreaInsets,
+  initialWindowMetrics,
+} from "react-native-safe-area-context";
 
 const Tab = createMaterialTopTabNavigator();
 
-function GoalsScreen() {
+export default function GoalsScreen() {
   return (
-    <Tab.Navigator initialRouteName="Reminders">
-      <Tab.Screen name="Reminders" component={Reminders} />
-      <Tab.Screen name="Timer" component={Timer} />
-      <Tab.Screen name="Stopwatch" component={Stopwatch} />
-    </Tab.Navigator>
+    <SafeAreaProvider>
+      <Tab.Navigator initialRouteName="Reminders">
+        <Tab.Screen name="Reminders" component={Reminders} />
+        <Tab.Screen name="Timer" component={Timer} />
+        <Tab.Screen name="Stopwatch" component={Stopwatch} />
+      </Tab.Navigator>
+    </SafeAreaProvider>
   );
 }
 
-export default GoalsScreen;
+//export default GoalsScreen;
 
 const styles = StyleSheet.create({
   container: {

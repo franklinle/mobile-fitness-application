@@ -1,16 +1,16 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { Text, View } from "react-native";
+import { Text, View, SafeAreaView } from "react-native";
 export default function Reminders() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Reminders</Text>
-      <View
+      <SafeAreaView
         style={styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-    </View>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
