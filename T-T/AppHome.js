@@ -3,9 +3,9 @@ import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "./screens/ProfileScreen";
-import GoalsScreen from "./screens/GoalsScreen";
+import ClockScreen from "./screens/ClockScreen";
 import MyWorkoutsScreen from "./screens/MyWorkoutsScreen";
-import SearchScreen from "./screens/SearchScreen";
+import ExercisesScreen from "./screens/ExercisesScreen";
 import HomeScreen from "./screens/HomeScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -26,6 +26,16 @@ export default function AppHome() {
         }}
       />
       <Tab.Screen
+        name="ExercisesScreen"
+        component={ExercisesScreen}
+        options={{
+          tabBarLabel: "Exercises",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="dumbbell" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="My Workouts"
         component={MyWorkoutsScreen}
         options={{
@@ -40,18 +50,8 @@ export default function AppHome() {
         }}
       />
       <Tab.Screen
-        name="Search"
-        component={SearchScreen}
-        options={{
-          tabBarLabel: "Search",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="magnify" color={color} size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Goals"
-        component={GoalsScreen}
+        name="Clock"
+        component={ClockScreen}
         options={{
           tabBarLabel: "Clock",
           tabBarIcon: ({ color }) => (

@@ -4,7 +4,7 @@ import { Text, View } from "react-native";
 export default function MyWorkoutsScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>MyWorkouts</Text>
+      <Text style={styles.title}>My Workouts (add tabs)</Text>
       <View
         style={styles.separator}
         lightColor="#eee"

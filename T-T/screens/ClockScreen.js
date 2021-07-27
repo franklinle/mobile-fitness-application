@@ -3,10 +3,7 @@ import { StyleSheet } from "react-native";
 import { Text, View, Button } from "react-native";
 import HomeScreen from "./HomeScreen";
 import ProfileScreen from "./ProfileScreen";
-import Timer from "./Timer";
-import Stopwatch from "./Stopwatch";
-import Reminders from "./Reminders";
-import SearchScreen from "./SearchScreen";
+import ExercisesScreen from "./ExercisesScreen";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -18,9 +15,48 @@ import {
   initialWindowMetrics,
 } from "react-native-safe-area-context";
 
+function Reminders() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Reminders</Text>
+      <SafeAreaView
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
+    </SafeAreaView>
+  );
+}
+
+function Stopwatch() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Stopwatch</Text>
+      <SafeAreaView
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
+    </SafeAreaView>
+  );
+}
+
+function Timer() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Timer</Text>
+      <SafeAreaView
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
+    </SafeAreaView>
+  );
+}
+
 const Tab = createMaterialTopTabNavigator();
 
-export default function GoalsScreen() {
+export default function ClockScreen() {
   return (
     <SafeAreaProvider>
       <Tab.Navigator initialRouteName="Reminders">
