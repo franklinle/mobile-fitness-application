@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "./screens/ProfileScreen";
 import ClockScreen from "./screens/ClockScreen";
-import MyWorkoutsScreen from "./screens/MyWorkoutsScreen";
+import WorkoutsScreen from "./screens/WorkoutsScreen";
 import ExercisesScreen from "./screens/ExercisesScreen";
 import HomeScreen from "./screens/HomeScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -37,9 +37,9 @@ export default function AppHome() {
       />
       <Tab.Screen
         name="My Workouts"
-        component={MyWorkoutsScreen}
+        component={WorkoutsScreen}
         options={{
-          tabBarLabel: "My Workouts",
+          tabBarLabel: "Workouts",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="weight-lifter"
