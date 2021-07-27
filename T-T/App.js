@@ -32,11 +32,15 @@ const Stack = createStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LandingPage">
+      <Stack.Navigator initialRouteName="LandingPage" headerMode="none">
         <Stack.Screen name="LandingPage" component={LandingPage} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="AppHome" component={AppHome} />
+        <Stack.Screen
+          name="AppHome"
+          component={AppHome}
+          //options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
