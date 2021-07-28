@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./LoginScreen";
 import Register from "./Register";
 import AppHome from "./AppHome";
+import ForgotPassword from "./ForgotPassword";
 
 function LandingPage({ navigation }) {
   return (
@@ -34,12 +35,21 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="LandingPage" headerMode="none">
         <Stack.Screen name="LandingPage" component={LandingPage} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="Register" component={Register} />
         <Stack.Screen
-          name="AppHome"
-          component={AppHome}
-          //options={{ headerShown: false }}
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="AppHome" component={AppHome} />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
