@@ -5,17 +5,6 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home</Text>
-      <Button
-        title="Buttons are sick"
-        color="#f194ff"
-        onPress={() => Alert.alert("I love burritos")}
-      />
-      <Text> </Text>
-      <Button
-        title="Buttons are cool"
-        color="#f194ff"
-        onPress={() => Alert.alert("I love tacos")}
-      />
       <View
         style={styles.separator}
         lightColor="#eee"

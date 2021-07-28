@@ -3,9 +3,9 @@ import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "./screens/ProfileScreen";
-import GoalsScreen from "./screens/GoalsScreen";
-import MyWorkoutsScreen from "./screens/MyWorkoutsScreen";
-import SearchScreen from "./screens/SearchScreen";
+import ClockScreen from "./screens/ClockScreen";
+import WorkoutsScreen from "./screens/WorkoutsScreen";
+import ExercisesScreen from "./screens/ExercisesScreen";
 import HomeScreen from "./screens/HomeScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -26,10 +26,20 @@ export default function AppHome() {
         }}
       />
       <Tab.Screen
-        name="My Workouts"
-        component={MyWorkoutsScreen}
+        name="ExercisesScreen"
+        component={ExercisesScreen}
         options={{
-          tabBarLabel: "My Workouts",
+          tabBarLabel: "Exercises",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="dumbbell" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="My Workouts"
+        component={WorkoutsScreen}
+        options={{
+          tabBarLabel: "Workouts",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="weight-lifter"
@@ -40,22 +50,12 @@ export default function AppHome() {
         }}
       />
       <Tab.Screen
-        name="Search"
-        component={SearchScreen}
+        name="Clock"
+        component={ClockScreen}
         options={{
-          tabBarLabel: "Search",
+          tabBarLabel: "Clock",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="magnify" color={color} size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Goals"
-        component={GoalsScreen}
-        options={{
-          tabBarLabel: "Goals",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="calendar" color={color} size={26} />
+            <MaterialCommunityIcons name="clock" color={color} size={26} />
           ),
         }}
       />

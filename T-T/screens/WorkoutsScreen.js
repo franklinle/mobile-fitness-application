@@ -1,10 +1,10 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import { Text, View } from "react-native";
-export default function MyWorkoutsScreen() {
+export default function WorkoutsScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>MyWorkouts</Text>
+      <Text style={styles.title}>Workouts (add tabs)</Text>
       <View
         style={styles.separator}
         lightColor="#eee"
