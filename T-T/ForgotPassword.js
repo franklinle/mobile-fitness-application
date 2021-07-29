@@ -1,11 +1,14 @@
 import * as React from "react";
 import { View, Text, Image, TextInput, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { LinearGradient } from "expo-linear-gradient";
 export default function ForgotPassword({ navigation }) {
   return (
     <View style={styles.container}>
+      <LinearGradient
+        colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
+        style={styles.background}
+      />
       <Image
         source={require("../T-T/assets/lockLogo.png")}
         style={styles.pic}
@@ -20,10 +23,7 @@ export default function ForgotPassword({ navigation }) {
       <Pressable style={styles.box}>
         <Text style={styles.signUp}> Send Link</Text>
       </Pressable>
-      <Text style={styles.seperator}>
-        -------------------------------------------- OR
-        ---------------------------------------------
-      </Text>
+      <Text style={styles.seperator}>---- OR ----</Text>
       <Pressable style={styles.createBox}>
         <Text style={styles.create}> Create an account </Text>
       </Pressable>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   pic: {
     height: 250,
     width: 275,
-    marginTop: 20,
+    marginTop: 40,
     marginBottom: 30,
   },
   statement: {
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   seperator: {
     color: "#37686D",
-    paddingTop: 145,
+    paddingTop: 125,
     paddingBottom: 30,
   },
   create: {
@@ -97,5 +97,12 @@ const styles = StyleSheet.create({
   },
   createBox: {
     paddingBottom: 30,
+  },
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 800,
   },
 });

@@ -1,14 +1,16 @@
 import * as React from "react";
 import { Button, View, Text, Image, TextInput, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { LinearGradient } from "expo-linear-gradient";
 import ForgotPassword from "./App";
-import AppHome from "./AppHome";
 
 export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
+      <LinearGradient
+        colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
+        style={styles.background}
+      />
       <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
       <Text style={styles.title}> turtlGainz</Text>
       <TextInput placeholder="Email or username" style={styles.input} />
@@ -22,25 +24,13 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.passText}>Click here.</Text>
         </Pressable>
       </View>
-      <Text style={styles.seperator}>
-        -------------------------------------------- OR
-        ---------------------------------------------
-      </Text>
+      <Text style={styles.seperator}>---- OR ----</Text>
       <Pressable style={styles.box}>
         <Text style={styles.signUp}> Log in with Google </Text>
       </Pressable>
       <Pressable>
         <Text style={styles.signUp2}> Sign up </Text>
       </Pressable>
-      {/* <Button
-        title="Go to Landing Page"
-        onPress={() => navigation.navigate("LandingPage")}
-      />
-      <Text> </Text>
-      <Button
-        title="AppHome(with bottom nav)"
-        onPress={() => navigation.navigate("AppHome")}
-      /> */}
     </View>
   );
 }
@@ -54,7 +44,7 @@ const styles = StyleSheet.create({
   pic: {
     height: 250,
     width: 275,
-    marginTop: 20,
+    marginTop: 40,
     marginBottom: 30,
   },
   title: {
@@ -101,7 +91,14 @@ const styles = StyleSheet.create({
   },
   seperator: {
     color: "#37686D",
-    paddingTop: 125,
+    paddingTop: 105,
     paddingBottom: 30,
+  },
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 800,
   },
 });
