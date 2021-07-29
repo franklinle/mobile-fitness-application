@@ -31,7 +31,7 @@ export default function ForgotPassword({ navigation }) {
         <Text style={styles.signUp}> Log in with Google </Text>
       </Pressable>
       <Pressable>
-        <Text style={styles.signUp2}> Sign up </Text>
+        <Text style={styles.signUp2}> Back to log in</Text>
       </Pressable>
     </View>
   );
@@ -46,28 +46,28 @@ const styles = StyleSheet.create({
   pic: {
     height: 250,
     width: 275,
-    marginTop: 40,
-    marginBottom: 30,
+    marginTop: "10%",
+    marginBottom: "5%",
   },
   statement: {
     color: "#37686D",
     fontSize: 20,
   },
   stateBox: {
-    paddingBottom: 30,
+    paddingBottom: "7%",
     width: 400,
     alignItems: "center",
   },
   input: {
     borderRadius: 10,
-    borderWidth: 1,
     height: 40,
     width: 300,
-    marginBottom: 10,
+    marginBottom: "2.5%",
     padding: 10,
     fontSize: 20,
     backgroundColor: "#D6E4E2",
     borderWidth: 0,
+    zIndex: 2,
   },
   box: {
     backgroundColor: "#37686D",
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     width: 300,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 10,
+    marginBottom: "2.5%",
   },
   signUp: {
     fontSize: 20,
@@ -88,15 +88,15 @@ const styles = StyleSheet.create({
   },
   seperator: {
     color: "#37686D",
-    paddingTop: 125,
-    paddingBottom: 30,
+    paddingTop: "30%",
+    paddingBottom: "7%",
   },
   create: {
     fontSize: 30,
     color: "white",
   },
   createBox: {
-    paddingBottom: 30,
+    paddingBottom: "7%",
   },
   background: {
     position: "absolute",

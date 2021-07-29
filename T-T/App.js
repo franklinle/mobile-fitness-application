@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
   pic: {
     height: 250,
     width: 275,
-    marginTop: 100,
-    marginBottom: 100,
+    marginTop: "20%",
+    marginBottom: "20%",
   },
   box: {
     backgroundColor: "#37686D",
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     width: 200,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20,
+    marginBottom: "5%",
   },
   box2: {
     backgroundColor: "#8FBBC0",

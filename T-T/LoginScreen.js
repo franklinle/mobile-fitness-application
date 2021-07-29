@@ -44,25 +44,25 @@ const styles = StyleSheet.create({
   pic: {
     height: 250,
     width: 275,
-    marginTop: 40,
-    marginBottom: 30,
+    marginTop: "10%",
+    marginBottom: "5%",
   },
   title: {
     fontSize: 40,
     fontWeight: "bold",
     color: "#37686D",
-    marginBottom: 30,
+    marginBottom: "7%",
   },
   input: {
     borderRadius: 10,
-    borderWidth: 1,
+    borderWidth: 0,
     height: 40,
     width: 300,
-    marginBottom: 20,
+    marginBottom: "5%",
     padding: 10,
     fontSize: 20,
     backgroundColor: "#D6E4E2",
-    borderWidth: 0,
+    zIndex: 2,
   },
   box: {
     backgroundColor: "#37686D",
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     width: 300,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 10,
+    marginBottom: "2.5%",
   },
   signUp: {
     fontSize: 20,
@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
   },
   seperator: {
     color: "#37686D",
-    paddingTop: 105,
-    paddingBottom: 30,
+    paddingTop: "25%",
+    paddingBottom: "5%",
   },
   background: {
     position: "absolute",
