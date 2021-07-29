@@ -1,13 +1,15 @@
 import * as React from "react";
 import { Button, View, Text, Image, TextInput, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import LandingPage from "./App";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Register({ navigation }) {
   return (
     <View style={styles.container}>
+      <LinearGradient
+        colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
+        style={styles.background}
+      />
       <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
       <Text style={styles.title}> turtlGainz</Text>
       <TextInput placeholder="Email" style={styles.input} />
@@ -17,26 +19,13 @@ export default function Register({ navigation }) {
       <Pressable style={styles.box}>
         <Text style={styles.signUp}> Sign up </Text>
       </Pressable>
-      <Text style={styles.seperator}>
-        {" "}
-        -------------------------------------------- OR
-        ---------------------------------------------
-      </Text>
+      <Text style={styles.seperator}>---- OR ----</Text>
       <Pressable style={styles.box}>
         <Text style={styles.signUp}> Log in with Google </Text>
       </Pressable>
       <Pressable>
         <Text style={styles.signUp2}> Sign up </Text>
       </Pressable>
-      {/* <Button
-        title="Start Quiz?"
-        //onPress={() => navigation.navigate("LandingPage")}
-      />
-      <Text> </Text>
-      <Button
-        title="Go to Landing Page"
-        onPress={() => navigation.navigate("LandingPage")}
-      /> */}
     </View>
   );
 }
@@ -50,25 +39,26 @@ const styles = StyleSheet.create({
   pic: {
     height: 250,
     width: 275,
-    marginTop: 20,
-    marginBottom: 30,
+    marginTop: "10%",
+    marginBottom: "5%",
   },
   title: {
     fontSize: 40,
     fontWeight: "bold",
     color: "#37686D",
-    marginBottom: 30,
+    marginBottom: "7%",
   },
   input: {
     borderRadius: 10,
     borderWidth: 1,
     height: 40,
     width: 300,
-    marginBottom: 10,
+    marginBottom: "3.5%",
     padding: 10,
     fontSize: 20,
     backgroundColor: "#D6E4E2",
     borderWidth: 0,
+    zIndex: 2,
   },
   box: {
     backgroundColor: "#37686D",
@@ -77,7 +67,7 @@ const styles = StyleSheet.create({
     width: 300,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 10,
+    marginBottom: "3%",
   },
   signUp: {
     fontSize: 20,
@@ -89,7 +79,14 @@ const styles = StyleSheet.create({
   },
   seperator: {
     color: "#37686D",
-    paddingTop: 70,
-    paddingBottom: 30,
+    paddingTop: "5%",
+    paddingBottom: "4.75%",
+  },
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 800,
   },
 });
