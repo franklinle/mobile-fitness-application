@@ -14,14 +14,25 @@ const Tab = createBottomTabNavigator();
 export default function AppHome() {
   return (
     //<NavigationContainer>
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: "lightgrey",
+        inactiveTintColor: "white",
+        showLabel: false,
+        tabStyle: {
+          backgroundColor: "#5badb5",
+          marginBottom: -30,
+          paddingBottom: 20,
+        },
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
+            <MaterialCommunityIcons name="home" color={color} size={40} />
           ),
         }}
       />
@@ -31,7 +42,7 @@ export default function AppHome() {
         options={{
           tabBarLabel: "Exercises",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="dumbbell" color={color} size={26} />
+            <MaterialCommunityIcons name="dumbbell" color={color} size={40} />
           ),
         }}
       />
@@ -44,7 +55,7 @@ export default function AppHome() {
             <MaterialCommunityIcons
               name="weight-lifter"
               color={color}
-              size={26}
+              size={40}
             />
           ),
         }}
@@ -55,7 +66,7 @@ export default function AppHome() {
         options={{
           tabBarLabel: "Clock",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="clock" color={color} size={26} />
+            <MaterialCommunityIcons name="clock" color={color} size={40} />
           ),
         }}
       />
@@ -65,7 +76,7 @@ export default function AppHome() {
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
+            <MaterialCommunityIcons name="account" color={color} size={40} />
           ),
         }}
       />

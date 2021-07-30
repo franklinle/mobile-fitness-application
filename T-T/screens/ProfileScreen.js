@@ -1,72 +1,103 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, SafeAreaView } from "react-native";
 
-{/* <Image source = {require('./LandingScreen.png')} style={styles.icon} />
-<Image source = {require('./PlaceholderImg.png')} style={styles.graph} /> */}
-
+{
+  /* <Image source = {require('./LandingScreen.png')} style={styles.icon} />
+<Image source = {require('./PlaceholderImg.png')} style={styles.graph} /> */
+}
 
 export default function ProfileScreen() {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}> 
-        <View style= {styles.icon}>
-          <Image source = {require('./LandingScreen.png')} style={{height:"100%", width:"100%", resizeMode:"cover"}} />
-        </View>
-        <View style= {styles.graph}>
-          <Image source = {require('./PlaceholderImg.png')} style={{height:"100%", width:"100%", resizeMode:"cover"}} />
-        </View>
-      </View>
-      <View style={styles.body}>
-        <View style ={styles.activityName}>
-          <Text style={{textAlign: "center", textAlignVertical: "bottom", top:"40%", color:"white"}}>ACTIVITY (what is this?)</Text>
-        </View>
-        <View style={styles.calendar}>
-          <Text style={{textAlign: "center", textAlignVertical: "bottom", top:"40%"}}>Insert some sort of image thingy magjig that connects to calendar</Text>
-        </View>
-      </View>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Text> </Text>
+      <Text> </Text>
+      <Text style={styles.title}>My Profile</Text>
+    </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
+    backgroundColor: "white",
+    alignItems: "center",
+    paddingLeft: 20,
+    justifyContent: "flex-start",
   },
-  header: {
+  container2: {
     flex: 1,
+    backgroundColor: "white",
+    //alignItems: "center",
+    paddingLeft: 20,
+    paddingRight: 20,
+    justifyContent: "flex-start",
+  },
+  pic: {
+    height: 250,
+    width: 275,
+    marginTop: 20,
+    marginBottom: 30,
+  },
+  title: {
+    fontSize: 40,
+    fontWeight: "bold",
+    color: "#37686D",
+    marginBottom: 10,
+  },
+  title2: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "black",
+    marginBottom: 30,
+  },
+  input: {
+    borderRadius: 10,
+    borderWidth: 1,
+    height: 40,
+    width: 300,
+    marginBottom: 20,
+    padding: 10,
+    fontSize: 20,
+    backgroundColor: "#D6E4E2",
+    borderWidth: 0,
+  },
+  box: {
+    backgroundColor: "#6f9a9e",
+    borderRadius: 10,
+    height: 40,
+    width: 300,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+  signUp: {
+    fontSize: 20,
+    color: "white",
+  },
+  signUp2: {
+    fontSize: 17,
+    color: "white",
+  },
+  pass: {
+    alignItems: "flex-start",
+    width: 300,
     flexDirection: "row",
-    backgroundColor: "darkorange",
-    justifyContent: "space-around"
   },
-  icon: {
-    marginTop:40,
-    backgroundColor: "pink",
-    flexBasis:"30%",
-    overflow: "hidden",
-    marginBottom:20,
+  passText: {
+    color: "white",
   },
-  graph: {
-    marginTop:40,
-    backgroundColor: "red",
-    flexBasis: "60%",
-    overflow: "hidden",
-    marginBottom:20,
+  passTextUnderlined: {
+    color: "white",
+    textDecorationLine: "underline",
   },
-  body: {
-    flex: 3,
-    backgroundColor: "green",
-    flexDirection: "column",
-    justifyContent: "space-around",
-    padding:20,
+  separator: {
+    marginVertical: 30,
+    height: 1,
+    width: "80%",
   },
-  calendar: {
-    height:"85%",
-    backgroundColor: "orange"
-  },
-  activityName: {
-    backgroundColor: "gray",
-    height:"10%",
-  }
+  // toggle: {
+  //   justifyContent: "space-around",
+  //   paddingLeft: 100,
+  // },
 });

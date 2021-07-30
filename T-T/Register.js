@@ -1,32 +1,66 @@
 import * as React from "react";
-import { Button, View, Text, Image, TextInput, Pressable } from "react-native";
+import {
+  Button,
+  View,
+  Text,
+  Image,
+  TextInput,
+  Pressable,
+  SafeAreaView,
+} from "react-native";
 import { StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function Register({ navigation }) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <LinearGradient
         colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
         style={styles.background}
       />
       <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
       <Text style={styles.title}> turtlGainz</Text>
-      <TextInput placeholder="Email" style={styles.input} />
-      <TextInput placeholder="Username" style={styles.input} />
-      <TextInput placeholder="Password" style={styles.input} />
-      <TextInput placeholder="Confirm password" style={styles.input} />
-      <Pressable style={styles.box}>
+      <TextInput
+        placeholder="Email"
+        style={styles.input}
+        autoCorrect={false}
+        autoCapitalize="none"
+      />
+      <TextInput
+        placeholder="Username"
+        style={styles.input}
+        autoCorrect={false}
+        autoCapitalize="none"
+      />
+      <TextInput
+        placeholder="Password"
+        style={styles.input}
+        secureTextEntry={true}
+        autoCorrect={false}
+        autoCapitalize="none"
+      />
+      <TextInput
+        placeholder="Confirm password"
+        style={styles.input}
+        secureTextEntry={true}
+        autoCorrect={false}
+        autoCapitalize="none"
+      />
+      <Pressable
+        style={styles.box}
+        onPress={() => navigation.navigate("AppHome")}
+      >
         <Text style={styles.signUp}> Sign up </Text>
       </Pressable>
       <Text style={styles.seperator}>---- OR ----</Text>
       <Pressable style={styles.box}>
-        <Text style={styles.signUp}> Log in with Google </Text>
+        <Text style={styles.signUp}> Sign up with Google </Text>
       </Pressable>
+      <Text> </Text>
       <Pressable>
-        <Text style={styles.signUp2}> Sign up </Text>
+        <Text style={styles.signUp2}>Login </Text>
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
