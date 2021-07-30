@@ -1,11 +1,26 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+/* import { useFonts } from 'expo-font';
+import { AppLoading} from 'expo'
+import * as Font from 'expo-font';
+ */
 //import RNPickerSelect from 'react-native-picker-select';
 //import Button from 'react-bootstrap/Button';
 
 //Fitness Goal Question
 export function FitnessGoal() {
     const [fitnessGoal, setFitnessGoal] = useState("nothing");
+   /*  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+    function componentWillMount() {
+      Font.loadAsync( {
+          'ChakraPetch': require('../assets/fonts/ChakraPetch-SemiBold.ttf')
+        }
+      ).then(()=> setFontsLoaded(true))
+    }
+
+    componentWillMount; */
     /* const [pressed, setPressed] = useState(false);
     const [buttonType, setButtonType] = useState(); */
 
@@ -24,50 +39,67 @@ export function FitnessGoal() {
       if (string == "Lose Weight") setButtonType(2)
     }
  */
+ /*    if (!fontsLoaded) {
+      return(<AppLoading/>)
+    }
+ */
     return(
         <View style = {styles.container}>
-            <Text style ={Question.container}>What is your fitness Goal?</Text>
-            {/* <Pressable onPress={()=>setButton("Increase Activity")} style={(buttonType == 1) ? {backgroundColor: "red"} : {backgroundColor: "blue"}} >
-              <Text>Increase Activity</Text>
-            </Pressable> 
-            <Pressable onPress={()=>setButton("Lose Weight")} style={(buttonType == 2) ? {backgroundColor: "red"} : {backgroundColor: "blue"}} >
-              <Text>Lose Weight</Text>
-            </Pressable> 
-            <Text>{option}</Text> */}
-
-            {/*Note: Prob onPress direct to a function if more things need to be added*/}
-            <Button title="Increase Activity" onPress={()=> setFitnessGoal("Increase Activity")} /> 
-            <Text> {"\n"}</Text>
-            <Button title="Lose Weight" onPress={()=> setFitnessGoal("Lose Weight")} />
-            <Text> {"\n"}</Text>
-            <Button title="Gain Muscles" onPress={()=> setFitnessGoal("Gain Muscles")} />
-            <Text> {"\n"}</Text>
-            <Button title="Stay Healthy" onPress={()=> setFitnessGoal("Stay Healthy")} />
-            <Text> {"\n"}</Text>
-            <Button title="Tone" onPress={()=> setFitnessGoal("Tone")} />
-            <Text> {"\n"}</Text>
-            <Button title="Stress Reduction" onPress={()=> setFitnessGoal("Stress Reduction")} />
-            <Text> {"\n"}</Text>
-            <Text>Note these are buttons from react-native which suck so it will be changed later on to something better </Text>
+          <LinearGradient colors={['rgba(223, 238, 235, 0.8)', 'transparent']} style={styles.background}/>
+          <Text style ={styles.question}>What is your fitness Goal?</Text>
+          <View style={styles.buttons}>
+            <Button color={'rgb(81, 130, 135)'} title="Increase Activity" onPress={()=> setFitnessGoal("Increase Activity")}/> 
+            <Button color={'rgb(81, 130, 135)'} title="Lose Weight" onPress={()=> setFitnessGoal("Lose Weight")} />
+            <Button color={'rgb(81, 130, 135)'} title="Gain Muscles" onPress={()=> setFitnessGoal("Gain Muscles")} />
+            <Button color={'rgb(81, 130, 135)'} title="Stay Healthy" onPress={()=> setFitnessGoal("Stay Healthy")} />
+            <Button color={'rgb(81, 130, 135)'} title="Tone" onPress={()=> setFitnessGoal("Tone")} />
+            <Button color={'rgb(81, 130, 135)'} title="Stress Reduction" onPress={()=> setFitnessGoal("Stress Reduction")} />
+          </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-      color: 'black',
       flex: 1,
-      padding: 10,
-      backgroundColor: '#fff',
+      backgroundColor: "rgb(100, 181, 190)",
       alignItems: 'center',
       justifyContent: 'center',
+      flexDirection: "column",
     },
+    buttons: {
+      flex: .45,
+      width: "50%",
+      marginHorizontal: "20%",
+      justifyContent: 'space-between',
+      zIndex:2,
+    },
+    question: {
+      flex:.14,
+      color: "hsla(186, 33%, 32%, 1)",
+      fontSize: 30,
+      textAlign: "center",
+      marginHorizontal: "10%",
+      zIndex:2,
+      fontWeight: "700",
+    },
+    background: {
+      position: "absolute",
+      left: 0,
+      right: 0,
+      top: 0,
+      height: 800,
+      zIndex:1,
+    }
   });
 
-  const Question = StyleSheet.create({
-      container: {
-        color: 'red',
-        paddingBottom: 10,
-        fontSize: 30,
-      },
-  });
+  //Below lies code that may be used
+  /* <Pressable onPress={()=>setButton("Increase Activity")} style={(buttonType == 1) ? {backgroundColor: "red"} : {backgroundColor: "blue"}} >
+      <Text>Increase Activity</Text>
+    </Pressable> 
+    <Pressable onPress={()=>setButton("Lose Weight")} style={(buttonType == 2) ? {backgroundColor: "red"} : {backgroundColor: "blue"}} >
+      <Text>Lose Weight</Text>
+    </Pressable> 
+    <Text>{option}</Text> */
+
+  /*Note: Prob onPress direct to a function if more things need to be added*/
