@@ -13,15 +13,29 @@ export default function LoginScreen({ navigation }) {
       />
       <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
       <Text style={styles.title}> turtlGainz</Text>
-      <TextInput placeholder="Email or username" style={styles.input} />
-      <TextInput placeholder="Pasword" style={styles.input} />
-      <Pressable style={styles.box}>
-        <Text style={styles.signUp}> Sign up </Text>
+      <TextInput
+        placeholder="Email or username"
+        style={styles.input}
+        autoCorrect={false}
+        autoCapitalize="none"
+      />
+      <TextInput
+        placeholder="Password"
+        style={styles.input}
+        secureTextEntry={true}
+        autoCorrect={false}
+        autoCapitalize="none"
+      />
+      <Pressable
+        style={styles.box}
+        onPress={() => navigation.navigate("AppHome")}
+      >
+        <Text style={styles.signUp}>Login</Text>
       </Pressable>
       <View style={styles.pass}>
         <Text style={styles.passText}> Forgot your password? </Text>
         <Pressable onPress={() => navigation.navigate("ForgotPassword")}>
-          <Text style={styles.passText}>Click here.</Text>
+          <Text style={styles.passText2}>Click here.</Text>
         </Pressable>
       </View>
       <Text style={styles.seperator}>---- OR ----</Text>
@@ -44,7 +58,7 @@ const styles = StyleSheet.create({
   pic: {
     height: 250,
     width: 275,
-    marginTop: "10%",
+    marginTop: "20%",
     marginBottom: "5%",
   },
   title: {
@@ -88,6 +102,10 @@ const styles = StyleSheet.create({
   },
   passText: {
     color: "white",
+  },
+  passText2: {
+    color: "white",
+    textDecorationLine: "underline",
   },
   seperator: {
     color: "#37686D",
