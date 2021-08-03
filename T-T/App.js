@@ -8,6 +8,9 @@ import LoginScreen from "./LoginScreen";
 import Register from "./Register";
 import AppHome from "./AppHome";
 import ForgotPassword from "./ForgotPassword";
+import { FitnessGoal } from "./QuizScreens/Question1";
+import { Section1 } from "./QuizScreens/QuizSection1";
+import ProfileScreen from "./screens/ProfileScreen";
 
 function LandingPage({ navigation }) {
   return (
@@ -16,7 +19,8 @@ function LandingPage({ navigation }) {
         colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
         style={styles.background}
       />
-      <Pressable onPress={() => navigation.navigate("AppHome")}>
+      {/** Changed AppHome to Section1 */}
+      <Pressable onPress={() => navigation.navigate("ProfileScreen")}>
         <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
       </Pressable>
       <Pressable
@@ -37,6 +41,7 @@ function LandingPage({ navigation }) {
 
 const Stack = createStackNavigator();
 
+//Added FitnessGoal as a Stack.Screen
 function App() {
   return (
     <NavigationContainer>
@@ -53,6 +58,7 @@ function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="AppHome" component={AppHome} />
+        <Stack.Screen name= "ProfileScreen" component={ProfileScreen}/>
         <Stack.Screen
           name="ForgotPassword"
           component={ForgotPassword}
