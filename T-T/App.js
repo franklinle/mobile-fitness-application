@@ -10,6 +10,7 @@ import AppHome from "./AppHome";
 import ForgotPassword from "./ForgotPassword";
 import { FitnessGoal } from "./QuizScreens/Question1";
 import { Section1 } from "./QuizScreens/QuizSection1";
+import ProfileScreen from "./screens/ProfileScreen";
 
 function LandingPage({ navigation }) {
   return (
@@ -19,7 +20,7 @@ function LandingPage({ navigation }) {
         style={styles.background}
       />
       {/** Changed AppHome to Section1 */}
-      <Pressable onPress={() => navigation.navigate("Section1")}>
+      <Pressable onPress={() => navigation.navigate("ProfileScreen")}>
         <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
       </Pressable>
       <Pressable
@@ -57,7 +58,7 @@ function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="AppHome" component={AppHome} />
-        <Stack.Screen name= "Section1" component={Section1}/>
+        <Stack.Screen name= "ProfileScreen" component={ProfileScreen}/>
         <Stack.Screen
           name="ForgotPassword"
           component={ForgotPassword}
