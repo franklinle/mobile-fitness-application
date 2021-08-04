@@ -16,7 +16,7 @@ export default function Register({ navigation }) {
       <TextInput placeholder="Username" style={styles.input} />
       <TextInput placeholder="Password" style={styles.input} />
       <TextInput placeholder="Confirm password" style={styles.input} />
-      <Pressable style={styles.box}>
+      <Pressable style={styles.box} onPress={() => navigation.navigate("StartQuiz")}>
         <Text style={styles.signUp}> Sign up </Text>
       </Pressable>
       <Text style={styles.seperator}>---- OR ----</Text>

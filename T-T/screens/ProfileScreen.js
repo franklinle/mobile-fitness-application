@@ -8,7 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 <Image source = {require('./PlaceholderImg.png')} style={styles.graph} /> */
 }
 
-//const imageSource = "../assets/logo.png";
+//const imageSource = "../T-T/assets/logo.png";
 
 //Okay for some reason imageSource cannot be found
 //Issues to fix:

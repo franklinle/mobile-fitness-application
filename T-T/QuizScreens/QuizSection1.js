@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, Switch, Button} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { LinearGradient } from 'expo-linear-gradient';
+import { setDB } from '../bB/quiz';
 // import { NavigateTo } from '../NavigateApp';
 
 /*
@@ -11,12 +12,9 @@ There may be a huge issue for IOS users as the option I used is a temporary work
 styling for displaying the selected option is, I believe undefined, therefore on android you cannot see the selected option when you select
 it on the dropdown menu, hence the workaround. IOS may not have this issue and therefore may not be a problem. idk
 */
-export function Section1() {
+export function Section1({ navigation }) {
     const [isEnabled, setEnabled] = useState(false);
     const toggleSystem = () => setEnabled(prev => !prev);
-    const [Height, setHeight] = useState("");
-    const [Age, setAge] = useState("");
-    const [Weight, setWeight] = useState("");
 
     return (
     <View style = {styles.container}> 
@@ -31,26 +29,26 @@ export function Section1() {
             <RNPickerSelect
                 style={{ inputAndroid: { color: 'black' } }}
                 //useNativeAndroidPickerStyle={false}
-                onValueChange={(value) => setHeight(value)}
+                onValueChange={(value) => setDB(value, 1)}
                 items={height}
             />
             <Text style={styles.dropTitle}>Weight</Text> 
             <RNPickerSelect
                 style={{ inputAndroid: { color: 'black' } }}
                 //useNativeAndroidPickerStyle={false}
-                onValueChange={(value) => setWeight(value)}
+                onValueChange={(value) => setDB(value, 2)}
                 items={weight}
             />
             <Text style={styles.dropTitle}>Age</Text>
             <RNPickerSelect
                 style={{ inputAndroid: { color: 'black' } }}
                 //useNativeAndroidPickerStyle={false}
-                onValueChange={(value) => setAge(value)}
+                onValueChange={(value) => setDB(value, 3)}
                 items={age}
             />
         </View>
         <View style={styles.submitButton}>
-            <Button color={'rgb(81, 130, 135)'} title="Next" /* onPress={() => NavigateTo("Section2")} *//>
+            <Button color={'rgb(81, 130, 135)'} title="Next"  onPress={() => navigation.navigate("Question2")} />
         </View>
         <StatusBar style="auto" />
     </View>

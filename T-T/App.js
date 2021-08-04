@@ -11,6 +11,16 @@ import ForgotPassword from "./ForgotPassword";
 import { FitnessGoal } from "./QuizScreens/Question1";
 import { Section1 } from "./QuizScreens/QuizSection1";
 import ProfileScreen from "./screens/ProfileScreen";
+import { QuizStart } from "./QuizScreens/StartQuiz";
+import { LifeStyle } from "./QuizScreens/Question2";
+import { StressReduction } from "./QuizScreens/StressReduQ1";
+import { WeightLoss } from "./QuizScreens/WeightLossQ1";
+import { MuscleGroup } from "./QuizScreens/MuscleQ1";
+import { WeightLossDate } from "./QuizScreens/WeightLossQ2";
+import { DaysOfWorkout } from "./QuizScreens/EndQuestion1";
+import { LengthOfWorkout } from "./QuizScreens/EndQuestion2";
+import { TimeFrameOfWorkOut } from "./QuizScreens/EndQuestion3";
+
 
 function LandingPage({ navigation }) {
   return (
@@ -59,6 +69,22 @@ function App() {
         />
         <Stack.Screen name="AppHome" component={AppHome} />
         <Stack.Screen name= "ProfileScreen" component={ProfileScreen}/>
+
+        {/**Here be temp code lines pls Amy, have fun -Eric, Christian*/}
+        <Stack.Screen name="StartQuiz" component={QuizStart}/>
+        <Stack.Screen name="Section1" component={Section1}/>
+        <Stack.Screen name="Question2" component={LifeStyle}/>
+        <Stack.Screen name="Question1" component={FitnessGoal}/>
+        <Stack.Screen name="StressReduction" component={StressReduction}/>
+        <Stack.Screen name="MuscleQ1" component={MuscleGroup}/>
+        <Stack.Screen name="WeightLoss" component={WeightLoss}/>
+        <Stack.Screen name="WeightLossDate" component={WeightLossDate}/>
+        <Stack.Screen name="DaysOfWorkout" component={DaysOfWorkout}/>
+        <Stack.Screen name="LengthOfWorkout" component={LengthOfWorkout}/>
+        <Stack.Screen name="TimeFrameOfWorkout" component={TimeFrameOfWorkOut}/>
+
+
+
         <Stack.Screen
           name="ForgotPassword"
           component={ForgotPassword}

@@ -1,21 +1,53 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { setDB } from '../bB/quiz';
 
 //If users chose Stress Reduction as goal
-export function StressReduction() {
+export function StressReduction({navigation}) {
     const [funExcercises, setFunExcercises] = useState("nothing");
 
+    async function setEnjoyableExcercises(string){
+      switch(string){
+        case "Intense + short":
+         setFunExcercises("Intense + short");
+          navigation.navigate("DaysOfWorkout");
+          break;
+        case "Mild + long":
+         setFunExcercises("Mild + long");
+          navigation.navigate("DaysOfWorkout");
+          break;
+        case "Stationary":
+         setFunExcercises("Stationary");
+          navigation.navigate("DaysOfWorkout");
+          break;
+        case "Active":
+         setFunExcercises("Active");
+          navigation.navigate("DaysOfWorkout");
+          break;
+        case "Other":
+         setFunExcercises("Other");
+          navigation.navigate("DaysOfWorkout");
+          break;
+        default:
+          break;
+      }
+    }
+
+    if (funExcercises != "nothing"){
+      setEnjoyableExcercises().then(() => {setDB(funExcercises, 9)})
+      }
+  
     return(
         <View style = {styles.container}>
           <LinearGradient colors={['rgba(223, 238, 235, 0.8)', 'transparent']} style={styles.background}/>
             <Text style ={styles.question}>What type excercises do you enjoy?</Text>
             <View style={styles.buttons}>
-              <Button color={'rgb(81, 130, 135)'} title="Intense + short" onPress={()=> setFunExcercises("Intense + short")} /> 
-              <Button color={'rgb(81, 130, 135)'} title="Mild + long" onPress={()=> setFunExcercises("Mild + long")} />
-              <Button color={'rgb(81, 130, 135)'} title="Stationary" onPress={()=> setFunExcercises("Stationary")} />
-              <Button color={'rgb(81, 130, 135)'} title="Active" onPress={()=> setFunExcercises("Active")} />
-              <Button color={'rgb(81, 130, 135)'} title="Other" onPress={()=> setFunExcercises("Other")} />
+              <Button color={'rgb(81, 130, 135)'} title="Intense + short" onPress={()=> setEnjoyableExcercises("Intense + short")} /> 
+              <Button color={'rgb(81, 130, 135)'} title="Mild + long" onPress={()=> setEnjoyableExcercises("Mild + long")} />
+              <Button color={'rgb(81, 130, 135)'} title="Stationary" onPress={()=> setEnjoyableExcercises("Stationary")} />
+              <Button color={'rgb(81, 130, 135)'} title="Active" onPress={()=> setEnjoyableExcercises("Active")} />
+              <Button color={'rgb(81, 130, 135)'} title="Other" onPress={()=> setEnjoyableExcercises("Other")} />
             </View>
         </View>
     )
