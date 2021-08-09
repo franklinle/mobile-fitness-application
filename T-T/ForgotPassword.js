@@ -1,40 +1,121 @@
-import * as React from "react";
-import { View, Text, Image, TextInput, Pressable } from "react-native";
-import { StyleSheet } from "react-native";
+import React, { Fragment } from "react";
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  Pressable,
+  StyleSheet,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-export default function ForgotPassword({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
-        style={styles.background}
-      />
-      <Image
-        source={require("../T-T/assets/lockLogo.png")}
-        style={styles.pic}
-      />
-      <View style={styles.stateBox}>
-        <Text style={styles.statement}>
-          Enter your email to receive a link to
-        </Text>
-        <Text style={styles.statement}>recover and reset your password.</Text>
+import { passwordReset } from "./actions/user";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import ErrorMessage from "./Components/ErrorMessage";
+import { withFirebaseHOC } from "./config/context";
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .label("Email")
+    .email("Enter a valid email")
+    .required("Please enter a registered email"),
+});
+
+class ForgotPW extends React.Component {
+  handlePasswordReset = async (values, actions) => {
+    const { email } = values;
+
+    try {
+      passwordReset(email);
+      console.log("Password reset email sent successfully");
+      this.props.navigation.navigate("LoginScreen");
+    } catch (error) {
+      actions.setFieldError("general", error.message);
+    }
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <LinearGradient
+          colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
+          style={styles.background}
+        />
+
+        <Image
+          source={require("../T-T/assets/lockLogo.png")}
+          style={styles.pic}
+        />
+
+        <View style={styles.stateBox}>
+          <Text style={styles.statement}>
+            Enter your email to receive a link to
+          </Text>
+          <Text style={styles.statement}>recover and reset your password.</Text>
+        </View>
+        <Formik
+          initialValues={{ email: "" }}
+          onSubmit={(values, actions) => {
+            this.handlePasswordReset(values, actions);
+          }}
+          validationSchema={validationSchema}
+        >
+          {({
+            handleChange,
+            values,
+            handleSubmit,
+            errors,
+            isValid,
+            touched,
+            handleBlur,
+            isSubmitting,
+          }) => (
+            <Fragment>
+              <TextInput
+                name="email"
+                value={values.email}
+                onChangeText={handleChange("email")}
+                placeholder="Enter email"
+                autoCapitalize="none"
+                iconName="ios-mail"
+                iconColor="#2C384A"
+                onBlur={handleBlur("email")}
+                style={styles.input}
+              />
+              <ErrorMessage errorValue={touched.email && errors.email} />
+              <View style={styles.buttonContainer}>
+                <Pressable
+                  style={styles.box}
+                  buttonType="outline"
+                  onPress={handleSubmit}
+                  buttonColor="#039BE5"
+                  disabled={!isValid || isSubmitting}
+                >
+                  <Text style={styles.signUp}> Send Link</Text>
+                </Pressable>
+              </View>
+              <ErrorMessage errorValue={errors.general} />
+            </Fragment>
+          )}
+        </Formik>
+        <Text style={styles.seperator}>---- OR ----</Text>
+        <Pressable
+          style={styles.createBox}
+          onPress={() => this.props.navigation.navigate("Signup")}
+        >
+          <Text style={styles.create}> Create an account </Text>
+        </Pressable>
+        <Pressable style={styles.box}>
+          <Text style={styles.signUp}> Log in with Google </Text>
+        </Pressable>
+        <Pressable
+          onPress={() => this.props.navigation.navigate("LoginScreen")}
+        >
+          <Text style={styles.signUp2}> Back to log in</Text>
+        </Pressable>
       </View>
-      <TextInput placeholder="Email" style={styles.input} />
-      <Pressable style={styles.box}>
-        <Text style={styles.signUp}> Send Link</Text>
-      </Pressable>
-      <Text style={styles.seperator}>---- OR ----</Text>
-      <Pressable style={styles.createBox}>
-        <Text style={styles.create}> Create an account </Text>
-      </Pressable>
-      <Pressable style={styles.box}>
-        <Text style={styles.signUp}> Log in with Google </Text>
-      </Pressable>
-      <Pressable>
-        <Text style={styles.signUp2}> Back to log in</Text>
-      </Pressable>
-    </View>
-  );
+    );
+  }
 }
 const styles = StyleSheet.create({
   container: {
@@ -106,3 +187,5 @@ const styles = StyleSheet.create({
     height: 800,
   },
 });
+
+export default withFirebaseHOC(ForgotPW);

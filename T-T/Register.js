@@ -1,68 +1,80 @@
 import * as React from "react";
 import {
-  Button,
+  StyleSheet,
   View,
   Text,
   Image,
   TextInput,
   Pressable,
-  SafeAreaView,
 } from "react-native";
-import { StyleSheet } from "react-native";
+import {
+  updateEmail,
+  updateUsername,
+  updatePassword,
+  signup,
+} from "./actions/user";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default function Register({ navigation }) {
-  return (
-    <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
-        style={styles.background}
-      />
-      <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
-      <Text style={styles.title}> turtlGainz</Text>
-      <TextInput
-        placeholder="Email"
-        style={styles.input}
-        autoCorrect={false}
-        autoCapitalize="none"
-      />
-      <TextInput
-        placeholder="Username"
-        style={styles.input}
-        autoCorrect={false}
-        autoCapitalize="none"
-      />
-      <TextInput
-        placeholder="Password"
-        style={styles.input}
-        secureTextEntry={true}
-        autoCorrect={false}
-        autoCapitalize="none"
-      />
-      <TextInput
-        placeholder="Confirm password"
-        style={styles.input}
-        secureTextEntry={true}
-        autoCorrect={false}
-        autoCapitalize="none"
-      />
-      <Pressable
-        style={styles.box}
-        onPress={() => navigation.navigate("AppHome")}
-      >
-        <Text style={styles.signUp}> Sign up </Text>
-      </Pressable>
-      <Text style={styles.seperator}>---- OR ----</Text>
-      <Pressable style={styles.box}>
-        <Text style={styles.signUp}> Sign up with Google </Text>
-      </Pressable>
-      <Text> </Text>
-      <Pressable>
-        <Text style={styles.signUp2}>Login </Text>
-      </Pressable>
-    </SafeAreaView>
-  );
+class Signup extends React.Component {
+  handleSignUp = () => {
+    this.props.signup();
+    this.props.navigation.navigate("AppHome");
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <LinearGradient
+          colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
+          style={styles.background}
+        />
+        <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
+        <Text style={styles.title}> turtlGainz</Text>
+        <TextInput
+          placeholder="Email"
+          id="email"
+          style={styles.input}
+          value={this.props.user.email}
+          onChangeText={(email) => this.props.updateEmail(email)}
+        />
+        <TextInput
+          placeholder="Username"
+          autoCompleteType="off"
+          id="username"
+          style={styles.input}
+          value={this.props.user.username}
+          onChangeText={(username) => this.props.updateUsername(username)}
+        />
+        <TextInput
+          placeholder="Password"
+          id="password"
+          style={styles.input}
+          value={this.props.user.password}
+          onChangeText={(password) => this.props.updatePassword(password)}
+          secureTextEntry={true}
+        />
+        <TextInput
+          placeholder="Confirm password"
+          style={styles.input}
+          secureTextEntry={true}
+        />
+        <Pressable style={styles.box} onPress={this.handleSignUp}>
+          <Text style={styles.signUp}> Sign up </Text>
+        </Pressable>
+        <Text style={styles.seperator}>
+          -------------------------------------------- OR
+          ---------------------------------------------
+        </Text>
+        <Pressable style={styles.box}>
+          <Text style={styles.signUp}> Log in with Google </Text>
+        </Pressable>
+      </View>
+    );
+  }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -124,3 +136,18 @@ const styles = StyleSheet.create({
     height: 800,
   },
 });
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    { updateEmail, updatePassword, updateUsername, signup },
+    dispatch
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

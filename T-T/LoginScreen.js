@@ -1,53 +1,79 @@
 import * as React from "react";
-import { Button, View, Text, Image, TextInput, Pressable } from "react-native";
-import { StyleSheet } from "react-native";
+import {
+  View,
+  Image,
+  TextInput,
+  Pressable,
+  StyleSheet,
+  Text,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import ForgotPassword from "./App";
+import { updateEmail, updatePassword, getUser, login } from "./actions/user";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import Firebase from "./config/Firebase";
 
-export default function LoginScreen({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
-        style={styles.background}
-      />
-      <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
-      <Text style={styles.title}> turtlGainz</Text>
-      <TextInput
-        placeholder="Email or username"
-        style={styles.input}
-        autoCorrect={false}
-        autoCapitalize="none"
-      />
-      <TextInput
-        placeholder="Password"
-        style={styles.input}
-        secureTextEntry={true}
-        autoCorrect={false}
-        autoCapitalize="none"
-      />
-      <Pressable
-        style={styles.box}
-        onPress={() => navigation.navigate("AppHome")}
-      >
-        <Text style={styles.signUp}>Login</Text>
-      </Pressable>
-      <View style={styles.pass}>
-        <Text style={styles.passText}> Forgot your password? </Text>
-        <Pressable onPress={() => navigation.navigate("ForgotPassword")}>
-          <Text style={styles.passText2}>Click here.</Text>
+class LoginScreen extends React.Component {
+  componentDidMount = () => {
+    Firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.props.getUser(user.uid);
+        if (this.props.user != null) {
+          this.props.navigation.navigate("AppHome");
+        }
+      }
+    });
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <LinearGradient
+          colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
+          style={styles.background}
+        />
+
+        <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
+
+        <Text style={styles.title}> turtlGainz</Text>
+        <TextInput
+          placeholder="Email"
+          style={styles.input}
+          value={this.props.user.email}
+          onChangeText={(email) => this.props.updateEmail(email)}
+        />
+        <TextInput
+          placeholder="Password"
+          style={styles.input}
+          value={this.props.user.password}
+          onChangeText={(password) => this.props.updatePassword(password)}
+          secureTextEntry={true}
+        />
+        <Pressable style={styles.box} onPress={() => this.props.login()}>
+          <Text style={styles.signUp}> Login </Text>
+        </Pressable>
+
+        <Pressable
+          onPress={() => this.props.navigation.navigate("ForgotPassword")}
+        >
+          <Text style={styles.passText}> Forgot your password? </Text>
+        </Pressable>
+
+        <Text style={styles.seperator}>
+          -------------------------------------------- OR
+          ---------------------------------------------
+        </Text>
+        <Pressable style={styles.box}>
+          <Text style={styles.signUp}> Log in with Google </Text>
+        </Pressable>
+        <Pressable onPress={() => this.props.navigation.navigate("Register")}>
+          <Text style={styles.passText}>Create an account</Text>
         </Pressable>
       </View>
-      <Text style={styles.seperator}>---- OR ----</Text>
-      <Pressable style={styles.box}>
-        <Text style={styles.signUp}> Log in with Google </Text>
-      </Pressable>
-      <Pressable>
-        <Text style={styles.signUp2}> Sign up </Text>
-      </Pressable>
-    </View>
-  );
+    );
+  }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -58,7 +84,7 @@ const styles = StyleSheet.create({
   pic: {
     height: 250,
     width: 275,
-    marginTop: "20%",
+    marginTop: "10%",
     marginBottom: "5%",
   },
   title: {
@@ -103,10 +129,6 @@ const styles = StyleSheet.create({
   passText: {
     color: "white",
   },
-  passText2: {
-    color: "white",
-    textDecorationLine: "underline",
-  },
   seperator: {
     color: "#37686D",
     paddingTop: "25%",
@@ -120,3 +142,18 @@ const styles = StyleSheet.create({
     height: 800,
   },
 });
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    { updateEmail, updatePassword, login, getUser },
+    dispatch
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
