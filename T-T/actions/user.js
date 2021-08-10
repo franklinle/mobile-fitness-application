@@ -1,7 +1,6 @@
 import Firebase, { db } from "../config/Firebase.js";
 import firebase from "firebase";
 import "firebase/firestore";
-
 // define types
 
 export const UPDATE_EMAIL = "UPDATE_EMAIL";
@@ -12,6 +11,7 @@ export const LOGIN = "LOGIN";
 export const SIGNUP = "SIGNUP";
 export const FORGOTPW = "FORGOTPW";
 export const STATS = "STATS";
+export const GLOGIN = "GLOGIN";
 
 // actions
 

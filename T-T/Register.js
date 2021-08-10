@@ -20,7 +20,7 @@ import { LinearGradient } from "expo-linear-gradient";
 class Signup extends React.Component {
   handleSignUp = () => {
     this.props.signup();
-    this.props.navigation.navigate("AppHome");
+    this.props.navigation.navigate("LoginScreen");
   };
 
   render() {

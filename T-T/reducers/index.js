@@ -6,11 +6,14 @@ import {
   UPDATE_PASSWORD,
   UPDATE_USERNAME,
   UPDATE_PASSWORD2,
+  GLOGIN,
 } from "../actions/user";
 
 const user = (state = {}, action) => {
   switch (action.type) {
     case LOGIN:
+      return action.payload;
+    case GLOGIN:
       return action.payload;
     case SIGNUP:
       return action.payload;

@@ -58,7 +58,12 @@ function App() {
   return (
     <NavigationContainer>
       <Provider store={store}>
-        <Stack.Navigator initialRouteName="LandingPage" headerMode="none">
+        <Stack.Navigator
+          initialRouteName="LandingPage"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
           <Stack.Screen name="LandingPage" component={LandingPage} />
           <Stack.Screen
             name="LoginScreen"

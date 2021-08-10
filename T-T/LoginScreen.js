@@ -12,11 +12,8 @@ import { updateEmail, updatePassword, getUser, login } from "./actions/user";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Firebase from "./config/Firebase";
-import firebase from "firebase";
-import "firebase/firestore";
-
 import * as Google from "expo-google-app-auth";
-import * as GoogleSignIn from "expo-google-sign-in";
+import firebase from "firebase";
 
 class LoginScreen extends React.Component {
   componentDidMount = () => {
@@ -28,6 +25,23 @@ class LoginScreen extends React.Component {
         }
       }
     });
+  };
+
+  isUserEqual = (googleUser, firebaseUser) => {
+    if (firebaseUser) {
+      var providerData = firebaseUser.providerData;
+      for (var i = 0; i < providerData.length; i++) {
+        if (
+          providerData[i].providerId ===
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+          providerData[i].uid === googleUser.getBasicProfile().getId()
+        ) {
+          // We don't need to reauth the Firebase connection.
+          return true;
+        }
+      }
+    }
+    return false;
   };
 
   onSignIn = (googleUser) => {
@@ -46,7 +60,7 @@ class LoginScreen extends React.Component {
           // Sign in with credential from the Google user.
           firebase
             .auth()
-            .signInAndRetrieveDataWithCredential(credential)
+            .signInWithCredential(credential)
             .then(function (result) {
               console.log("user sign in");
               firebase
@@ -82,7 +96,6 @@ class LoginScreen extends React.Component {
   async signInWithGoogle() {
     try {
       const result = await Google.logInAsync({
-        behavior: "web",
         androidClientId:
           "115689882535-s814mnf30u4se10u1jhnnhqks854c16f.apps.googleusercontent.com",
         iosClientId:
@@ -98,7 +111,7 @@ class LoginScreen extends React.Component {
         );
         firebase
           .auth()
-          .signInAndRetrieveDataWithCredential(credential)
+          .signInWithCredential(credential)
           .then((res) => {
             // user res, create your user, do whatever you want
           })
@@ -112,6 +125,27 @@ class LoginScreen extends React.Component {
       console.log("err:", err);
     }
   }
+
+  signInWithGoogleAsync = async () => {
+    try {
+      const result = await Google.logInAsync({
+        androidClientId:
+          "115689882535-s814mnf30u4se10u1jhnnhqks854c16f.apps.googleusercontent.com",
+        iosClientId:
+          "115689882535-i2dpc1o7r8cm1jasuksoq0gsk3anna7v.apps.googleusercontent.com",
+        scopes: ["profile", "email"],
+      });
+
+      if (result.type === "success") {
+        this.onSignIn(result);
+        return result.accessToken;
+      } else {
+        return { cancelled: true };
+      }
+    } catch (e) {
+      return { error: true };
+    }
+  };
 
   render() {
     return (
@@ -151,7 +185,7 @@ class LoginScreen extends React.Component {
           -------------------------------------------- OR
           ---------------------------------------------
         </Text>
-        <Pressable style={styles.box} onPress={() => this.signInWithGoogle()}>
+        <Pressable style={styles.box} onPress={this.signInWithGoogle}>
           <Text style={styles.signUp}> Log in with Google </Text>
         </Pressable>
         <Pressable onPress={() => this.props.navigation.navigate("Register")}>
