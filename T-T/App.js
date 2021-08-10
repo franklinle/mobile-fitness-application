@@ -20,6 +20,7 @@ import { WeightLossDate } from "./QuizScreens/WeightLossQ2";
 import { DaysOfWorkout } from "./QuizScreens/EndQuestion1";
 import { LengthOfWorkout } from "./QuizScreens/EndQuestion2";
 import { TimeFrameOfWorkOut } from "./QuizScreens/EndQuestion3";
+import { ProfileSettings } from "./screens/ProfileSettings";
 
 
 function LandingPage({ navigation }) {
@@ -68,7 +69,11 @@ function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="AppHome" component={AppHome} />
+        {/**This Profile Screen is technically not supposed to be here and therefore the connection to the options page
+         * should also not work the moment this is deleted.
+         */}
         <Stack.Screen name= "ProfileScreen" component={ProfileScreen}/>
+        <Stack.Screen name= "ProfileSettings" component={ProfileSettings} />
 
         {/**Here be temp code lines pls Amy, have fun -Eric, Christian*/}
         <Stack.Screen name="StartQuiz" component={QuizStart}/>
