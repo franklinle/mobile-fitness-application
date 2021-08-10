@@ -12,6 +12,11 @@ import { updateEmail, updatePassword, getUser, login } from "./actions/user";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Firebase from "./config/Firebase";
+import firebase from "firebase";
+import "firebase/firestore";
+
+import * as Google from "expo-google-app-auth";
+import * as GoogleSignIn from "expo-google-sign-in";
 
 class LoginScreen extends React.Component {
   componentDidMount = () => {
@@ -24,6 +29,89 @@ class LoginScreen extends React.Component {
       }
     });
   };
+
+  onSignIn = (googleUser) => {
+    console.log("Google Auth Response", googleUser);
+    // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+    var unsubscribe = firebase.auth().onAuthStateChanged(
+      function (firebaseUser) {
+        unsubscribe();
+        // Check if we are already signed-in Firebase with the correct user.
+        if (!this.isUserEqual(googleUser, firebaseUser)) {
+          // Build Firebase credential with the Google ID token.
+          var credential = firebase.auth.GoogleAuthProvider.credential(
+            googleUser.idToken,
+            googleUser.accessToken
+          );
+          // Sign in with credential from the Google user.
+          firebase
+            .auth()
+            .signInAndRetrieveDataWithCredential(credential)
+            .then(function (result) {
+              console.log("user sign in");
+              firebase
+                .database()
+                .ref("/users" + result.user.uid)
+                .set({
+                  gmail: result.user.email,
+                  profile_picture:
+                    result.additionalUserInfo.profile.profile_picture,
+                  locale: result.additionalUserInfo.profile_picture.locale,
+                  first_name: result.additionalUserInfo.given_name,
+                  last_name: result.additionalUserInfo.first_name,
+                })
+                .then(function (snapshot) {});
+            })
+            .catch(function (error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // The email of the user's account used.
+              var email = error.email;
+              // The firebase.auth.AuthCredential type that was used.
+              var credential = error.credential;
+              // ...
+            });
+        } else {
+          console.log("User already signed-in Firebase.");
+        }
+      }.bind(this)
+    );
+  };
+
+  async signInWithGoogle() {
+    try {
+      const result = await Google.logInAsync({
+        behavior: "web",
+        androidClientId:
+          "115689882535-s814mnf30u4se10u1jhnnhqks854c16f.apps.googleusercontent.com",
+        iosClientId:
+          "115689882535-i2dpc1o7r8cm1jasuksoq0gsk3anna7v.apps.googleusercontent.com",
+        scopes: ["profile", "email"],
+      });
+
+      if (result.type === "success") {
+        const { idToken, accessToken } = result;
+        const credential = firebase.auth.GoogleAuthProvider.credential(
+          idToken,
+          accessToken
+        );
+        firebase
+          .auth()
+          .signInAndRetrieveDataWithCredential(credential)
+          .then((res) => {
+            // user res, create your user, do whatever you want
+          })
+          .catch((error) => {
+            console.log("firebase cred err:", error);
+          });
+      } else {
+        return { cancelled: true };
+      }
+    } catch (err) {
+      console.log("err:", err);
+    }
+  }
 
   render() {
     return (
@@ -63,7 +151,7 @@ class LoginScreen extends React.Component {
           -------------------------------------------- OR
           ---------------------------------------------
         </Text>
-        <Pressable style={styles.box}>
+        <Pressable style={styles.box} onPress={() => this.signInWithGoogle()}>
           <Text style={styles.signUp}> Log in with Google </Text>
         </Pressable>
         <Pressable onPress={() => this.props.navigation.navigate("Register")}>
