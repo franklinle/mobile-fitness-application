@@ -3,7 +3,7 @@ import { LogBox } from "react-native";
 
 LogBox.ignoreLogs(["Setting a timer"]);
 
-const userID = "";
+const userID = "Test";
 
 export function setPR() {
   db.collection("").doc("").set({
@@ -29,7 +29,7 @@ export function getHeight() {
     .doc(userID)
     .get()
     .then((doc) => {
-      console.log(doc.data().height);
+      return doc.data().height;
     });
 }
 
@@ -38,7 +38,7 @@ export function getWeight() {
     .doc(userID)
     .get()
     .then((doc) => {
-      console.log(doc.data().weight);
+      return doc.data().weight;
     });
 }
 
