@@ -1,7 +1,6 @@
 import Firebase, { db } from "../config/Firebase.js";
 import firebase from "firebase";
 import "firebase/firestore";
-import * as GoogleAuthentication from "expo-google-app-auth";
 
 // define types
 

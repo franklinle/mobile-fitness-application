@@ -1,15 +1,29 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import { Text, View, Button, Alert, SafeAreaView } from "react-native";
-export default function HomeScreen() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text> </Text>
-      <Text> </Text>
-      <Text style={styles.title}>Home</Text>
-    </SafeAreaView>
-  );
+import Firebase from "../config/Firebase";
+import { connect } from "react-redux";
+
+class HomeScreen extends React.Component {
+  handleSignout = () => {
+    Firebase.auth().signOut();
+    this.props.navigation.navigate("LoginScreen");
+  };
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text> </Text>
+        <Text> </Text>
+        <Text style={styles.title}>Home</Text>
+        <Text>{this.props.user.username}</Text>
+        <Text>{this.props.user.uid}</Text>
+        <Text>{this.props.user.email}</Text>
+        <Button title="Logout" onPress={this.handleSignout} />
+      </SafeAreaView>
+    );
+  }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -94,3 +108,11 @@ const styles = StyleSheet.create({
   //   paddingLeft: 100,
   // },
 });
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(HomeScreen);

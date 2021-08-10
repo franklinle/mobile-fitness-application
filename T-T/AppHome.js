@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Pressable, Text } from "react-native";
 import ProfileScreen from "./screens/ProfileScreen";
 import ClockScreen from "./screens/ClockScreen";
 import WorkoutsScreen from "./screens/WorkoutsScreen";

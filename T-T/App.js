@@ -1,9 +1,14 @@
 import * as React from "react";
-import { Button, View, Text, Image, Pressable } from "react-native";
-import { StyleSheet } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Text,
+  Pressable,
+  Image,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { LinearGradient } from "expo-linear-gradient";
 import LoginScreen from "./LoginScreen";
 import Register from "./Register";
 import AppHome from "./AppHome";
@@ -12,6 +17,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
 import reducer from "./reducers";
+import { LinearGradient } from "expo-linear-gradient";
 
 const middleware = applyMiddleware(thunkMiddleware);
 const store = createStore(reducer, middleware);
