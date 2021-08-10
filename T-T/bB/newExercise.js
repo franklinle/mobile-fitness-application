@@ -8,12 +8,52 @@ const equip = "bench";
 const link = "LINK";
 const group = "triceps";
 const description = "dont hurt yourself";
+const userID = "";
 
-export function newExercise() {
-  db.collection("Exercises").doc(exerciseName).set({
-    Description: description,
-    Equipment: equip,
-    link: link,
-    "Muscle Group": group,
-  });
+export function newExerciseName(exerciseName) {
+  db.collection("users")
+    .doc(userID)
+    .collection("CustomWorkouts")
+    .doc(exerciseName)
+    .set({});
+}
+
+export function newExerciseDescription(exerciseName, description) {
+  db.collection("users")
+    .doc(userID)
+    .collection("CustomWorkouts")
+    .doc(exerciseName)
+    .set({
+      Description: description,
+    });
+}
+
+export function newExerciseEquipment(exerciseName, equip) {
+  db.collection("users")
+    .doc(userID)
+    .collection("CustomWorkouts")
+    .doc(exerciseName)
+    .set({
+      Equipment: equip,
+    });
+}
+
+export function newExerciseLink(exerciseName, link) {
+  db.collection("users")
+    .doc(userID)
+    .collection("CustomWorkouts")
+    .doc(exerciseName)
+    .set({
+      link: link,
+    });
+}
+
+export function newExerciseGroup(exerciseName, group) {
+  db.collection("users")
+    .doc(userID)
+    .collection("CustomWorkouts")
+    .doc(exerciseName)
+    .set({
+      "Muscle Group": group,
+    });
 }

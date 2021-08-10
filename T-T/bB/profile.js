@@ -3,21 +3,61 @@ import { LogBox } from "react-native";
 
 LogBox.ignoreLogs(["Setting a timer"]);
 
-const user = "";
+const userID = "";
+
+export function setPR() {
+  db.collection("").doc("").set({
+    bench: "",
+    pushUp: "",
+    sitUp: "",
+    squats: "",
+    water: "",
+  });
+}
 
 export function getProfile() {
   db.collection("users")
-    .doc(user)
+    .doc(userID)
     .get()
     .then((doc) => {
       console.log(doc.data());
     });
 }
 
-export function setProfile() {
-  db.collection("users").doc(user).update({
-    email: "",
-    uid: "",
-    username: "",
-  });
+export function getHeight() {
+  db.collection("users")
+    .doc(userID)
+    .get()
+    .then((doc) => {
+      console.log(doc.data().height);
+    });
 }
+
+export function getWeight() {
+  db.collection("users")
+    .doc(userID)
+    .get()
+    .then((doc) => {
+      console.log(doc.data().weight);
+    });
+}
+
+export function getPR() {
+  db.collection("")
+    .doc("")
+    .get()
+    .then((doc) => {
+      console.log(doc.data());
+    });
+}
+
+export function getWorkout() {
+  db.collection("users")
+    .doc(userID)
+    .get()
+    .then((doc) => {
+      console.log(doc.data());
+    });
+}
+
+export function getDayWorkout() {}

@@ -1,3 +1,5 @@
+import { db } from "../config/Firebase";
+
 export function randomQuote() {
   let min = Math.ceil(1);
   let max = Math.floor(100);
