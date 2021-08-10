@@ -1,69 +1,91 @@
 import * as React from "react";
-import { Button, View, Text, Image, Pressable } from "react-native";
-import { StyleSheet } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Text,
+  Pressable,
+  Image,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { LinearGradient } from "expo-linear-gradient";
 import LoginScreen from "./LoginScreen";
 import Register from "./Register";
 import AppHome from "./AppHome";
 import ForgotPassword from "./ForgotPassword";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunkMiddleware from "redux-thunk";
+import reducer from "./reducers";
+import { LinearGradient } from "expo-linear-gradient";
+
+const middleware = applyMiddleware(thunkMiddleware);
+const store = createStore(reducer, middleware);
+const Stack = createStackNavigator();
 
 function LandingPage({ navigation }) {
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
-        style={styles.background}
-      />
-      <Pressable onPress={() => navigation.navigate("AppHome")}>
-        <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
-      </Pressable>
-      <Pressable
-        style={styles.box}
-        onPress={() => navigation.navigate("Register")}
-      >
-        <Text style={styles.buttonText}> Get started </Text>
-      </Pressable>
-      <Pressable
-        style={styles.box2}
-        onPress={() => navigation.navigate("LoginScreen")}
-      >
-        <Text style={styles.buttonText}> Log in </Text>
-      </Pressable>
+      <Provider store={store}>
+        <LinearGradient
+          colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
+          style={styles.background}
+        />
+        <Pressable onPress={() => navigation.navigate("AppHome")}>
+          <Image
+            source={require("../T-T/assets/logo.png")}
+            style={styles.pic}
+          />
+        </Pressable>
+        <Pressable
+          style={styles.box}
+          onPress={() => navigation.navigate("Register")}
+        >
+          <Text style={styles.buttonText}> Get started </Text>
+        </Pressable>
+        <Pressable
+          style={styles.box2}
+          onPress={() => navigation.navigate("LoginScreen")}
+        >
+          <Text style={styles.buttonText}> Log in </Text>
+        </Pressable>
+      </Provider>
     </View>
   );
 }
 
-const Stack = createStackNavigator();
-
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LandingPage" headerMode="none">
-        <Stack.Screen name="LandingPage" component={LandingPage} />
-        <Stack.Screen
-          name="LoginScreen"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Register"
-          component={Register}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="AppHome" component={AppHome} />
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPassword}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
+      <Provider store={store}>
+        <Stack.Navigator
+          initialRouteName="LandingPage"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="LandingPage" component={LandingPage} />
+          <Stack.Screen
+            name="LoginScreen"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="AppHome" component={AppHome} />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </Provider>
     </NavigationContainer>
   );
 }
-
-export default App;
 
 const styles = StyleSheet.create({
   container: {
@@ -113,3 +135,5 @@ const styles = StyleSheet.create({
     height: 800,
   },
 });
+
+export default App;
