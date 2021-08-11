@@ -4,8 +4,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable } from 'react-native';
 
 //Start of Quiz
+//You the firebase organization of fields is whack prob go back to change lol
 //Implement Pressable
-export function QuizStart() {
+export function QuizStart({ navigation }) {
 
     return(
         <View style = {styles.container}>
@@ -13,8 +14,7 @@ export function QuizStart() {
             <Text style ={styles.question}>A Fitness Quiz!</Text>
             <Text style= {styles.text}>A quiz on your fitness preferences and goals! This will help us prepare the best custom plan for you!</Text>
             <View style ={styles.buttons}>
-              <Button color={'rgb(81, 130, 135)'} title="Start the Quiz Now!" /> 
-              {/* <Button color={'rgb(81, 130, 135)'} title="-Skip Quiz-" /> */}
+              <Button color={'rgb(81, 130, 135)'} title="Start the Quiz Now!" onPress={() => navigation.navigate("Section1")}/> 
             </View>
             <Pressable >
               <Text style={{color: "white", marginTop: "85%"}}>-Skip Quiz-</Text>
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
       color: "hsla(186, 33%, 32%, 1)",
       width: "70%",
       marginBottom: "20%",
+      zIndex: 2,
     },
     background: {
       position: "absolute",

@@ -1,23 +1,64 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { setDB } from '../bB/quiz';
 
 //If users chose GainingMuscle as Goal
-export function MuscleGroup() {
+export function MuscleGroup({navigation}) {
     const [muscleGroup, setMuscleGroup] = useState("nothing");
+
+    async function setMuscleGoal(string){
+      switch(string){
+        case "Chest":
+          setMuscleGroup("Chest");
+          navigation.navigate("StressReduction");
+          break;
+        case "Legs/Calves":
+          setMuscleGroup("Legs/Calves");
+          navigation.navigate("StressReduction");
+          break;
+        case "Shoulder":
+          setMuscleGroup("Shoulder");
+          navigation.navigate("StressReduction");
+          break;
+        case "Front arm":
+          setMuscleGroup("Front arm");
+          navigation.navigate("StressReduction");
+          break;
+        case "Back arm??":
+          setMuscleGroup("Back arm??");
+          navigation.navigate("StressReduction");
+          break;
+        case "Back":
+          setMuscleGroup("Back");
+          navigation.navigate("StressReduction");
+          break;
+        case "Stomach":
+          setMuscleGroup("Stomach");
+          navigation.navigate("StressReduction");
+          break;
+        default:
+          break;
+      }
+    }
+
+    if (muscleGroup != "nothing"){
+      setMuscleGoal().then(() => {setDB(muscleGroup, 8)})
+    }
+  
 
     return(
         <View style = {styles.container}>
           <LinearGradient colors={['rgba(223, 238, 235, 0.8)', 'transparent']} style={styles.background}/>
             <Text style ={styles.question}>What Muscle groups do you want to work on?</Text>
             <View style= {styles.buttons}>
-              <Button color={'rgb(81, 130, 135)'} title="Chest" onPress={()=> setMuscleGroup("Chest")} /> 
-              <Button color={'rgb(81, 130, 135)'} title="Legs/Calves" onPress={()=> setMuscleGroup("Legs/Calves")} />
-              <Button color={'rgb(81, 130, 135)'} title="Shoulder" onPress={()=> setMuscleGroup("Shoulder")} />
-              <Button color={'rgb(81, 130, 135)'} title="Front arm" onPress={()=> setMuscleGroup("Front arm")} />
-              <Button color={'rgb(81, 130, 135)'} title="Back arm??" onPress={()=> setMuscleGroup("Back arm??")} />
-              <Button color={'rgb(81, 130, 135)'} title="Back" onPress={()=> setMuscleGroup("Back")} />
-              <Button color={'rgb(81, 130, 135)'} title="Stomach" onPress={()=> setMuscleGroup("Stomach")} />
+              <Button color={'rgb(81, 130, 135)'} title="Chest" onPress={()=> setMuscleGoal("Chest")} /> 
+              <Button color={'rgb(81, 130, 135)'} title="Legs/Calves" onPress={()=> setMuscleGoal("Legs/Calves")} />
+              <Button color={'rgb(81, 130, 135)'} title="Shoulder" onPress={()=> setMuscleGoal("Shoulder")} />
+              <Button color={'rgb(81, 130, 135)'} title="Front arm" onPress={()=> setMuscleGoal("Front arm")} />
+              <Button color={'rgb(81, 130, 135)'} title="Back arm??" onPress={()=> setMuscleGoal("Back arm??")} />
+              <Button color={'rgb(81, 130, 135)'} title="Back" onPress={()=> setMuscleGoal("Back")} />
+              <Button color={'rgb(81, 130, 135)'} title="Stomach" onPress={()=> setMuscleGoal("Stomach")} />
             </View>
         </View>
     )

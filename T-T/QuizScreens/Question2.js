@@ -1,18 +1,42 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import {setDB} from '../bB/quiz';
+
+const QUESTION_ONE = 1;
 
 //LifeStyle
-export function LifeStyle() {
-    const [option, setOption] = useState("nothing");
+export function LifeStyle({navigation}) {
+    const [workoutLifeStyle, setWorkoutLifeStyle] = useState("nothing");
+
+    async function setLifeStyle (number) {
+      switch (number){
+        case 1:
+          setWorkoutLifeStyle("Sedentary");
+          navigation.navigate("Question1");
+          break;
+        case 2:
+          setWorkoutLifeStyle("Active");
+          navigation.navigate("Question1");
+          break;
+        default:
+          break;
+      }
+    }
+
+    if (workoutLifeStyle != "nothing"){
+      setLifeStyle().then(() => {setDB(workoutLifeStyle, 4)})
+    }
+
+
 
     return(
         <View style = {styles.container}>
           <LinearGradient colors={['rgba(223, 238, 235, 0.8)', 'transparent']} style={styles.background}/>
             <Text style ={styles.question}>Describe your LifeStyle?</Text>
             <View style={styles.buttons}>
-              <Button color={'rgb(81, 130, 135)'} title="Sedentary" onPress={()=> setOption("Sedentary")} /> 
-              <Button color={'rgb(81, 130, 135)'} title="Active" onPress={()=> setOption("Active")} />
+              <Button color={'rgb(81, 130, 135)'} title="Sedentary" onPress={()=> setLifeStyle(1)} /> 
+              <Button color={'rgb(81, 130, 135)'} title="Active" onPress={()=> setLifeStyle(2)} />
             </View>
         </View>
     )
