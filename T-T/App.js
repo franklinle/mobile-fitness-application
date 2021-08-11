@@ -29,56 +29,68 @@ const Stack = createStackNavigator();
 function LandingPage({ navigation }) {
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
-        style={styles.background}
-      />
-      {/** Changed AppHome to Section1 */}
-      <Pressable onPress={() => navigation.navigate("ProfileScreen")}>
-        <Image source={require("../T-T/assets/logo.png")} style={styles.pic} />
-      </Pressable>
-      <Pressable
-        style={styles.box}
-        onPress={() => navigation.navigate("Register")}
-      >
-        <Text style={styles.buttonText}> Get started </Text>
-      </Pressable>
-      <Pressable
-        style={styles.box2}
-        onPress={() => navigation.navigate("LoginScreen")}
-      >
-        <Text style={styles.buttonText}> Log in </Text>
-      </Pressable>
+      <Provider store={store}>
+        <LinearGradient
+          colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
+          style={styles.background}
+        />
+        {/** Changed AppHome to Section1 */}
+        <Pressable onPress={() => navigation.navigate("ProfileScreen")}>
+          <Image
+            source={require("../T-T/assets/logo.png")}
+            style={styles.pic}
+          />
+        </Pressable>
+        <Pressable
+          style={styles.box}
+          onPress={() => navigation.navigate("Register")}
+        >
+          <Text style={styles.buttonText}> Get started </Text>
+        </Pressable>
+        <Pressable
+          style={styles.box2}
+          onPress={() => navigation.navigate("LoginScreen")}
+        >
+          <Text style={styles.buttonText}> Log in </Text>
+        </Pressable>
+      </Provider>
     </View>
   );
 }
 
-const Stack = createStackNavigator();
+// const Stack = createStackNavigator();
 
 //Added FitnessGoal as a Stack.Screen
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LandingPage" headerMode="none">
-        <Stack.Screen name="LandingPage" component={LandingPage} />
-        <Stack.Screen
-          name="LoginScreen"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Register"
-          component={Register}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="AppHome" component={AppHome} />
-        <Stack.Screen name= "ProfileScreen" component={ProfileScreen}/>
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPassword}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
+      <Provider store={store}>
+        <Stack.Navigator
+          initialRouteName="LandingPage"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="LandingPage" component={LandingPage} />
+          <Stack.Screen
+            name="LoginScreen"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="AppHome" component={AppHome} />
+          <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </Provider>
     </NavigationContainer>
   );
 }
