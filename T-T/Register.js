@@ -63,10 +63,7 @@ class Signup extends React.Component {
         <Pressable style={styles.box} onPress={this.handleSignUp}>
           <Text style={styles.signUp}> Sign up </Text>
         </Pressable>
-        <Text style={styles.seperator}>
-          -------------------------------------------- OR
-          ---------------------------------------------
-        </Text>
+        <Text style={styles.seperator}>---- OR ----</Text>
         <Pressable style={styles.box}>
           <Text style={styles.signUp}> Log in with Google </Text>
         </Pressable>

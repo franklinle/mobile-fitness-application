@@ -1,9 +1,6 @@
 import { Firebase, db } from "../config/Firebase";
-import { LogBox } from "react-native";
 
-//LogBox.ignoreLogs(["Setting a timer"]);
-
-const user = "Id";
+const user = "quizTest";
 
 export function newQuiz() {
   db.collection("Quiz").doc(user).set({
@@ -22,9 +19,21 @@ export function newQuiz() {
   });
 }
 
-//Pretty sure I can't name fields here due to the follow update regex
 export function setDB(text, num) {
-  db.collection("Quiz")
-    .doc(user)
-    .update({ [num]: text });
+  if (num == 1) {
+    db.collection("users").doc(user).update({ height: text });
+    db.collection("users")
+      .doc(user)
+      .collection("Quiz")
+      .doc("quizAnswers")
+      .set({});
+  } else if (num == 2) {
+    db.collection("users").doc(user).update({ weight: text });
+  } else {
+    db.collection("users")
+      .doc(user)
+      .collection("Quiz")
+      .doc("quizAnswers")
+      .update({ [num]: text });
+  }
 }

@@ -1,9 +1,11 @@
 import { Firebase, db } from "../config/Firebase";
-import { LogBox } from "react-native";
+import { getNumOfHeight, getNumOfWeight } from "../screens/ProfileScreen";
+// import { LogBox } from "react-native";
 
-LogBox.ignoreLogs(["Setting a timer"]);
+// LogBox.ignoreLogs(["Setting a timer"]);
 
 const userID = "Test";
+var test = "";
 
 export function setPR() {
   db.collection("").doc("").set({
@@ -19,13 +21,12 @@ export function getProfile() {
   db.collection("users")
     .doc(userID)
     .get()
-    .then((doc) => {
-      console.log(doc.data());
-    });
+    .then((doc) => {});
 }
 
 export function getHeight() {
-  db.collection("users")
+  return db
+    .collection("users")
     .doc(userID)
     .get()
     .then((doc) => {
@@ -34,7 +35,8 @@ export function getHeight() {
 }
 
 export function getWeight() {
-  db.collection("users")
+  return db
+    .collection("users")
     .doc(userID)
     .get()
     .then((doc) => {
@@ -59,5 +61,3 @@ export function getWorkout() {
       console.log(doc.data());
     });
 }
-
-export function getDayWorkout() {}

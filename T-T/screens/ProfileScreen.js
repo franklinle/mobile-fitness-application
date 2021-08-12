@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { Text, View, Image, ScrollView, Pressable } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
+import { getHeight, getWeight } from "../bB/profile";
 
 {
   /* <Image source = {require('./LandingScreen.png')} style={styles.icon} />
@@ -23,8 +24,15 @@ Next steps include adding in the variables to be displayed and maybe even try to
 */
 
 const NumOfActiveRoutines = 5;
-const NumOfWeight = "16 lbs";
-const NumOfHeight = "6' 11";
+var NumOfWeight = "";
+var NumOfHeight = "";
+
+getHeight().then((a) => {
+  NumOfHeight = a;
+});
+getWeight().then((a) => {
+  NumOfWeight = a;
+});
 
 const goal =
   "some stupid fake goal that is way too long in order to check out the space bs, flash news this tight af we sure?";
