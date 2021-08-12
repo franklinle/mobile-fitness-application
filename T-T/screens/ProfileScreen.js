@@ -1,9 +1,12 @@
 import * as React from "react";
+import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Text, View, Image, ScrollView, Pressable } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import { getHeight, getWeight } from "../bB/profile";
+
+import { login, signup, fodder } from "../actions/user";
 
 {
   /* <Image source = {require('./LandingScreen.png')} style={styles.icon} />
@@ -24,15 +27,8 @@ Next steps include adding in the variables to be displayed and maybe even try to
 */
 
 const NumOfActiveRoutines = 5;
-var NumOfWeight = "";
-var NumOfHeight = "";
-
-getHeight().then((a) => {
-  NumOfHeight = a;
-});
-getWeight().then((a) => {
-  NumOfWeight = a;
-});
+// var NumOfWeight = "";
+// var NumOfHeight = "";
 
 const goal =
   "some stupid fake goal that is way too long in order to check out the space bs, flash news this tight af we sure?";
@@ -106,6 +102,21 @@ function displayMiniBars(string) {
 }
 
 export default function ProfileScreen({ navigation }) {
+  const [NumOfWeight, SetNumOfWeight] = useState("loading");
+  const [NumOfHeight, SetNumOfHeight] = useState("loading");
+
+  // won't work when we sign in -> log out -> sign into diff acc
+  async function x() {
+    await fodder();
+    getHeight().then((a) => {
+      SetNumOfHeight(a);
+    });
+    getWeight().then((a) => {
+      SetNumOfWeight(a);
+    });
+  }
+  x();
+
   //Change flex number if there is more than 5 excercises
   function barType(number) {
     switch (number) {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Pressable } from "react-native";
+import { user } from "../actions/user";
 
 //Start of Quiz
 //You the firebase organization of fields is whack prob go back to change lol

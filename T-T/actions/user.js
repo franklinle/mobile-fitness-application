@@ -13,6 +13,12 @@ export const FORGOTPW = "FORGOTPW";
 export const STATS = "STATS";
 export const GLOGIN = "GLOGIN";
 
+export let user = {
+  uid: "Test",
+  email: "oof",
+  username: "bigoof",
+};
+
 // actions
 
 export const updateEmail = (email) => {
@@ -52,6 +58,9 @@ export const login = () => {
         password
       );
 
+      user.uid = response.user.uid;
+
+      fodder();
       dispatch(getUser(response.user.uid));
     } catch (e) {
       alert(e);
@@ -79,13 +88,17 @@ export const signup = () => {
         password
       );
       if (response.user.uid) {
-        const user = {
-          uid: response.user.uid,
-          email: email,
-          username: username,
-        };
+        // user = {
+        //   uid: response.user.uid,
+        //   email: email,
+        //   username: username,
+        // };
+        user.uid = response.user.uid;
+        user.email = email;
+        user.username = username;
         db.collection("users").doc(response.user.uid).set(user);
 
+        fodder();
         dispatch({ type: SIGNUP, payload: user });
       }
     } catch (e) {
@@ -97,3 +110,7 @@ export const signup = () => {
 export const passwordReset = (email) => {
   return firebase.auth().sendPasswordResetEmail(email);
 };
+
+export function fodder() {
+  console.log(user.uid);
+}

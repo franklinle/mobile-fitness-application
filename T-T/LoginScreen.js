@@ -140,13 +140,13 @@ class LoginScreen extends React.Component {
         <TextInput
           placeholder="Email"
           style={styles.input}
-          value={this.props.user.email}
+          value={this.props.user.email || ""}
           onChangeText={(email) => this.props.updateEmail(email)}
         />
         <TextInput
           placeholder="Password"
           style={styles.input}
-          value={this.props.user.password}
+          value={this.props.user.password || ""}
           onChangeText={(password) => this.props.updatePassword(password)}
           secureTextEntry={true}
         />

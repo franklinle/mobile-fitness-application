@@ -36,6 +36,8 @@ import { LengthOfWorkout } from "./QuizScreens/EndQuestion2";
 import { TimeFrameOfWorkOut } from "./QuizScreens/EndQuestion3";
 import { ProfileSettings } from "./screens/ProfileSettings";
 
+import "./actions/user";
+
 function LandingPage({ navigation }) {
   return (
     <View style={styles.container}>
