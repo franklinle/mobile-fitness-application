@@ -13,6 +13,9 @@ import LoginScreen from "./LoginScreen";
 import Register from "./Register";
 import AppHome from "./AppHome";
 import ForgotPassword from "./ForgotPassword";
+import { FitnessGoal } from "./QuizScreens/Question1";
+import { Section1 } from "./QuizScreens/QuizSection1";
+import ProfileScreen from "./screens/ProfileScreen";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
@@ -22,6 +25,18 @@ import { LinearGradient } from "expo-linear-gradient";
 const middleware = applyMiddleware(thunkMiddleware);
 const store = createStore(reducer, middleware);
 const Stack = createStackNavigator();
+import { QuizStart } from "./QuizScreens/StartQuiz";
+import { LifeStyle } from "./QuizScreens/Question2";
+import { StressReduction } from "./QuizScreens/StressReduQ1";
+import { WeightLoss } from "./QuizScreens/WeightLossQ1";
+import { MuscleGroup } from "./QuizScreens/MuscleQ1";
+import { WeightLossDate } from "./QuizScreens/WeightLossQ2";
+import { DaysOfWorkout } from "./QuizScreens/EndQuestion1";
+import { LengthOfWorkout } from "./QuizScreens/EndQuestion2";
+import { TimeFrameOfWorkOut } from "./QuizScreens/EndQuestion3";
+import { ProfileSettings } from "./screens/ProfileSettings";
+
+import "./actions/user";
 
 function LandingPage({ navigation }) {
   return (
@@ -31,7 +46,8 @@ function LandingPage({ navigation }) {
           colors={["rgba(223, 238, 235, 0.8)", "transparent"]}
           style={styles.background}
         />
-        <Pressable onPress={() => navigation.navigate("AppHome")}>
+        {/** Changed AppHome to Section1 */}
+        <Pressable onPress={() => navigation.navigate("ProfileScreen")}>
           <Image
             source={require("../T-T/assets/logo.png")}
             style={styles.pic}
@@ -54,6 +70,9 @@ function LandingPage({ navigation }) {
   );
 }
 
+// const Stack = createStackNavigator();
+
+//Added FitnessGoal as a Stack.Screen
 function App() {
   return (
     <NavigationContainer>
@@ -76,10 +95,29 @@ function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen name="AppHome" component={AppHome} />
+          <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
           <Stack.Screen
             name="ForgotPassword"
             component={ForgotPassword}
             options={{ headerShown: false }}
+          />
+
+          <Stack.Screen name="ProfileSettings" component={ProfileSettings} />
+
+          {/**Here be temp code lines pls Amy, have fun -Eric, Christian*/}
+          <Stack.Screen name="StartQuiz" component={QuizStart} />
+          <Stack.Screen name="Section1" component={Section1} />
+          <Stack.Screen name="Question2" component={LifeStyle} />
+          <Stack.Screen name="Question1" component={FitnessGoal} />
+          <Stack.Screen name="StressReduction" component={StressReduction} />
+          <Stack.Screen name="MuscleQ1" component={MuscleGroup} />
+          <Stack.Screen name="WeightLoss" component={WeightLoss} />
+          <Stack.Screen name="WeightLossDate" component={WeightLossDate} />
+          <Stack.Screen name="DaysOfWorkout" component={DaysOfWorkout} />
+          <Stack.Screen name="LengthOfWorkout" component={LengthOfWorkout} />
+          <Stack.Screen
+            name="TimeFrameOfWorkout"
+            component={TimeFrameOfWorkOut}
           />
         </Stack.Navigator>
       </Provider>

@@ -1,73 +1,94 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-//import RNPickerSelect from 'react-native-picker-select';
-//import Button from 'react-bootstrap/Button';
+import { LinearGradient } from 'expo-linear-gradient';
+import { setDB } from '../bB/quiz';
 
 //Fitness Goal Question
-export function FitnessGoal() {
+export function FitnessGoal({navigation}) {
     const [fitnessGoal, setFitnessGoal] = useState("nothing");
-    /* const [pressed, setPressed] = useState(false);
-    const [buttonType, setButtonType] = useState(); */
 
-    //Okay I'm stupid and I need a full redesign of the following button system if I'm going to do it
-    //Currently I'm going to switch to a workaround where the buttons are just going to send the user straight towards 
-    //the next page. Of course if a "next" button needs to implemented this will need to be revisted
-
-   /*  function setButton(value) {
-      option == value ? setFitnessGoal("nothing") : setFitnessGoal(value)
-      option == "nothing" ? setButtonType(0) : setSwitch(option)
-      setPressed(!pressed);
+    async function setGoal (number){
+      switch(number){
+        case 1:
+          setFitnessGoal("Increase Activity");
+          navigation.navigate("StressReduction");
+          break;
+        case 2:
+          setFitnessGoal("Lose Weight");
+          navigation.navigate("WeightLoss");
+          break;
+        case 3:
+          setFitnessGoal("Gain Muscles");
+          navigation.navigate("MuscleQ1");
+          break;
+        case 4:
+          setFitnessGoal("Stay Healthy");
+          navigation.navigate("StressReduction");
+          break;
+        case 5:
+          setFitnessGoal("Tone");
+          navigation.navigate("StressReduction");
+          break;
+        case 6:
+          setFitnessGoal("Stress Reduction");
+          navigation.navigate("StressReduction");
+          break;
+        default:
+          break;
+      }
     }
 
-    function setSwitch(string){
-      if (string == "Increase Activity") setButtonType(1)
-      if (string == "Lose Weight") setButtonType(2)
+    if (fitnessGoal != "nothing"){
+      setGoal().then(() => {setDB(fitnessGoal,5)})
     }
- */
+
+
     return(
         <View style = {styles.container}>
-            <Text style ={Question.container}>What is your fitness Goal?</Text>
-            {/* <Pressable onPress={()=>setButton("Increase Activity")} style={(buttonType == 1) ? {backgroundColor: "red"} : {backgroundColor: "blue"}} >
-              <Text>Increase Activity</Text>
-            </Pressable> 
-            <Pressable onPress={()=>setButton("Lose Weight")} style={(buttonType == 2) ? {backgroundColor: "red"} : {backgroundColor: "blue"}} >
-              <Text>Lose Weight</Text>
-            </Pressable> 
-            <Text>{option}</Text> */}
-
-            {/*Note: Prob onPress direct to a function if more things need to be added*/}
-            <Button title="Increase Activity" onPress={()=> setFitnessGoal("Increase Activity")} /> 
-            <Text> {"\n"}</Text>
-            <Button title="Lose Weight" onPress={()=> setFitnessGoal("Lose Weight")} />
-            <Text> {"\n"}</Text>
-            <Button title="Gain Muscles" onPress={()=> setFitnessGoal("Gain Muscles")} />
-            <Text> {"\n"}</Text>
-            <Button title="Stay Healthy" onPress={()=> setFitnessGoal("Stay Healthy")} />
-            <Text> {"\n"}</Text>
-            <Button title="Tone" onPress={()=> setFitnessGoal("Tone")} />
-            <Text> {"\n"}</Text>
-            <Button title="Stress Reduction" onPress={()=> setFitnessGoal("Stress Reduction")} />
-            <Text> {"\n"}</Text>
-            <Text>Note these are buttons from react-native which suck so it will be changed later on to something better </Text>
+          <LinearGradient colors={['rgba(223, 238, 235, 0.8)', 'transparent']} style={styles.background}/>
+          <Text style ={styles.question}>What is your fitness Goal?</Text>
+          <View style={styles.buttons}>
+            <Button color={'rgb(81, 130, 135)'} title="Increase Activity" onPress={()=> setGoal(1)}/> 
+            <Button color={'rgb(81, 130, 135)'} title="Lose Weight" onPress={()=> setGoal(2)} />
+            <Button color={'rgb(81, 130, 135)'} title="Gain Muscles" onPress={()=> setGoal(3)} />
+            <Button color={'rgb(81, 130, 135)'} title="Stay Healthy" onPress={()=> setGoal(4)} />
+            <Button color={'rgb(81, 130, 135)'} title="Tone" onPress={()=> setGoal(5)} />
+            <Button color={'rgb(81, 130, 135)'} title="Stress Reduction" onPress={()=> setGoal(6)} />
+          </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-      color: 'black',
       flex: 1,
-      padding: 10,
-      backgroundColor: '#fff',
+      backgroundColor: "rgb(100, 181, 190)",
       alignItems: 'center',
       justifyContent: 'center',
+      flexDirection: "column",
     },
-  });
-
-  const Question = StyleSheet.create({
-      container: {
-        color: 'red',
-        paddingBottom: 10,
-        fontSize: 30,
-      },
+    buttons: {
+      flex: .45,
+      width: "50%",
+      marginHorizontal: "20%",
+      justifyContent: 'space-between',
+      zIndex:2,
+    },
+    question: {
+      flex:.14,
+      color: "hsla(186, 33%, 32%, 1)",
+      fontSize: 30,
+      textAlign: "center",
+      marginHorizontal: "10%",
+      zIndex:2,
+      fontWeight: "700",
+    },
+    background: {
+      position: "absolute",
+      left: 0,
+      right: 0,
+      top: 0,
+      height: 800,
+      zIndex:1,
+    }
   });

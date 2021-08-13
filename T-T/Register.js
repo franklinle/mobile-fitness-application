@@ -12,6 +12,7 @@ import {
   updateUsername,
   updatePassword,
   signup,
+  getUser,
 } from "./actions/user";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -20,7 +21,7 @@ import { LinearGradient } from "expo-linear-gradient";
 class Signup extends React.Component {
   handleSignUp = () => {
     this.props.signup();
-    this.props.navigation.navigate("LoginScreen");
+    this.props.navigation.navigate("StartQuiz");
   };
 
   render() {
@@ -36,7 +37,7 @@ class Signup extends React.Component {
           placeholder="Email"
           id="email"
           style={styles.input}
-          value={this.props.user.email}
+          value={this.props.user.email || ""}
           onChangeText={(email) => this.props.updateEmail(email)}
         />
         <TextInput
@@ -44,14 +45,14 @@ class Signup extends React.Component {
           autoCompleteType="off"
           id="username"
           style={styles.input}
-          value={this.props.user.username}
+          value={this.props.user.username || ""}
           onChangeText={(username) => this.props.updateUsername(username)}
         />
         <TextInput
           placeholder="Password"
           id="password"
           style={styles.input}
-          value={this.props.user.password}
+          value={this.props.user.password || ""}
           onChangeText={(password) => this.props.updatePassword(password)}
           secureTextEntry={true}
         />
@@ -63,10 +64,7 @@ class Signup extends React.Component {
         <Pressable style={styles.box} onPress={this.handleSignUp}>
           <Text style={styles.signUp}> Sign up </Text>
         </Pressable>
-        <Text style={styles.seperator}>
-          -------------------------------------------- OR
-          ---------------------------------------------
-        </Text>
+        <Text style={styles.seperator}>---- OR ----</Text>
         <Pressable style={styles.box}>
           <Text style={styles.signUp}> Log in with Google </Text>
         </Pressable>
@@ -139,7 +137,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { updateEmail, updatePassword, updateUsername, signup },
+    { updateEmail, updatePassword, updateUsername, signup, getUser },
     dispatch
   );
 };

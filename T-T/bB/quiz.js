@@ -1,22 +1,23 @@
-import { Firebase, db } from "../config/Firebase";
-import { LogBox } from "react-native";
+import { db } from "../config/Firebase";
+import { user, signup } from "../actions/user";
 
-LogBox.ignoreLogs(["Setting a timer"]);
-
-const user = "Id";
-
-export function newQuiz() {
-  db.collection("Quiz").doc(user).set({
-    1: "",
-    2: "",
-    3: "",
-    4: "",
-    5: "",
-  });
-}
-
-export function setDB(text, num) {
-  db.collection("Quiz")
-    .doc(user)
-    .update({ [num]: text });
+export async function setDB(text, num) {
+  await signup();
+  const USERID = user.uid;
+  if (num == 1) {
+    db.collection("users").doc(USERID).update({ height: text });
+    db.collection("users")
+      .doc(USERID)
+      .collection("Quiz")
+      .doc("quizAnswers")
+      .set({});
+  } else if (num == 2) {
+    db.collection("users").doc(USERID).update({ weight: text });
+  } else {
+    db.collection("users")
+      .doc(USERID)
+      .collection("Quiz")
+      .doc("quizAnswers")
+      .update({ [num]: text });
+  }
 }
