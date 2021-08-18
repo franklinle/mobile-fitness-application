@@ -112,5 +112,5 @@ export const passwordReset = (email) => {
 };
 
 export function fodder() {
-  console.log(user.uid);
+  // console.log(user.uid);
 }

@@ -3,6 +3,13 @@ import { StyleSheet } from "react-native";
 import { Text, View, Button, Alert, SafeAreaView } from "react-native";
 import Firebase from "../config/Firebase";
 import { connect } from "react-redux";
+import { randomQuote } from "../bB/quote";
+let quote1 = "";
+let quote2 = "";
+randomQuote().then((a) => {
+  quote1 = a.quote;
+  quote2 = a.author;
+});
 
 class HomeScreen extends React.Component {
   handleSignout = () => {
@@ -12,8 +19,8 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text> </Text>
-        <Text> </Text>
+        <Text> {quote1} </Text>
+        <Text>{quote2}</Text>
         <Text style={styles.title}>Home</Text>
         <Text>{this.props.user.username}</Text>
         <Text>{this.props.user.uid}</Text>
