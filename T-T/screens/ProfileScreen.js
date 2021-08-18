@@ -4,9 +4,9 @@ import { StyleSheet } from "react-native";
 import { Text, View, Image, ScrollView, Pressable } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
-import { getHeight, getWeight } from "../bB/profile";
+import { getHeight, getWeight, getName, getProfileGoal } from "../bB/profile";
 
-import { login, signup, fodder } from "../actions/user";
+import { fodder } from "../actions/user";
 
 {
   /* <Image source = {require('./LandingScreen.png')} style={styles.icon} />
@@ -30,12 +30,12 @@ const NumOfActiveRoutines = 5;
 // var NumOfWeight = "";
 // var NumOfHeight = "";
 
-const goal =
-  "some stupid fake goal that is way too long in order to check out the space bs, flash news this tight af we sure?";
-const Username = "leSquirt";
+//const goal =
+// "some stupid fake goal that is way too long in order to check out the space bs, flash news this tight af we sure?";
+// const Username = "leSquirt";
 
 const DayOfWeek = "Monday";
-const Date = 5;
+const DATE = 5;
 const Month = "August";
 
 const ExcerciseName1 = "Back";
@@ -49,10 +49,9 @@ const ExcercisesOfTheDayTuesday = ["Back"];
 
 const ExcerciseBarType = ["Back", "Legs", "Arms", "Abs", "Chest"];
 
+const ArmExcercise = { color: "red" };
 const BackExcercise = {
-  key: "BackExcercise",
   color: "blue",
-  selectedDotColor: "blue",
 };
 
 function displayMiniBars(string) {
@@ -104,8 +103,11 @@ function displayMiniBars(string) {
 export default function ProfileScreen({ navigation }) {
   const [NumOfWeight, SetNumOfWeight] = useState("loading");
   const [NumOfHeight, SetNumOfHeight] = useState("loading");
+  const [Username, SetUsername] = useState("loading");
+  const [goal, setGoal] = useState("loading");
 
   // won't work when we sign in -> log out -> sign into diff acc
+  // restart expo -> auto log in doesn't work
   async function x() {
     await fodder();
     getHeight().then((a) => {
@@ -113,6 +115,12 @@ export default function ProfileScreen({ navigation }) {
     });
     getWeight().then((a) => {
       SetNumOfWeight(a);
+    });
+    getName().then((a) => {
+      SetUsername(a);
+    });
+    getProfileGoal().then((a) => {
+      setGoal(a);
     });
   }
   x();
@@ -245,6 +253,46 @@ export default function ProfileScreen({ navigation }) {
     }
   }
 
+  let nextDays = ["2021-08-01", "2021-08-02"];
+  let ExcerciseHistory = [
+    [BackExcercise, ArmExcercise],
+    [BackExcercise, ArmExcercise],
+    [ArmExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+    [BackExcercise],
+  ];
+
+  //These 3 splits the date an gets the day value.
+  const Day = new Date() + "";
+  const sep = Day.split(" ", 3);
+  const dateMonth = "08";
+
+  //You get dateMonth from database again prob from Date() function
+  nextDays[sep[2] - 1] = `2021-${dateMonth}-${sep[2]}`;
+
+  let mark = {};
+
+  nextDays.forEach((day) => {
+    const markersplit = day.split("-", 3);
+    let markerDate = markersplit[2];
+    if (markerDate[0] == 0) markerDate = markerDate[1];
+    mark[day] = { dots: ExcerciseHistory[markerDate] };
+  });
+
   return (
     <View style={styles.container}>
       <View style={styles.topBanner}>
@@ -276,7 +324,7 @@ export default function ProfileScreen({ navigation }) {
         </Pressable>
         <View style={styles.profilePicture}>
           <Image
-            source={require("./PlaceholderImg.png")}
+            source={require("../assets/BlankProfileIcon.png")}
             style={{ height: "100%", width: "100%", resizeMode: "cover" }}
           />
         </View>
@@ -376,7 +424,7 @@ export default function ProfileScreen({ navigation }) {
             </View>
           </View>
           <View style={styles.excerciseOfDay}>
-            <View style={styles.excerciseOfDayDate}>
+            <View style={styles.excerciseOfDayDATE}>
               <Text
                 style={{
                   fontSize: 15,
@@ -403,7 +451,7 @@ export default function ProfileScreen({ navigation }) {
                     fontWeight: 700,
                   }}
                 >
-                  {Date + "\n"}
+                  {DATE + "\n"}
                 </Text>
               </View>
               <Text
@@ -418,7 +466,7 @@ export default function ProfileScreen({ navigation }) {
               </Text>
             </View>
             <View style={styles.verticalLinesAreFun} />
-            {/**This does not update ever which makes it useless the next day just repeat what I did for the minibars */}
+            {/**This does not upDATE ever which makes it useless the next day just repeat what I did for the minibars */}
             <View style={styles.excerciseOfDayBars}>
               {AddBar(ExcerciseBarType[0])}
               {AddBar(ExcerciseBarType[1])}
@@ -452,7 +500,7 @@ export default function ProfileScreen({ navigation }) {
                   fontWeight: 500,
                 }}
               >
-                {Date}
+                {DATE}
               </Text>
               {displayMiniBars(ExcercisesOfTheDay[0])}
               {displayMiniBars(ExcercisesOfTheDay[1])}
@@ -478,7 +526,7 @@ export default function ProfileScreen({ navigation }) {
                   fontWeight: 500,
                 }}
               >
-                {Date + 1}
+                {DATE + 1}
               </Text>
               {displayMiniBars(ExcercisesOfTheDay[0])}
               {displayMiniBars(ExcercisesOfTheDay[1])}
@@ -504,7 +552,7 @@ export default function ProfileScreen({ navigation }) {
                   fontWeight: 500,
                 }}
               >
-                {Date + 2}
+                {DATE + 2}
               </Text>
               {displayMiniBars(ExcercisesOfTheDay[0])}
               {displayMiniBars(ExcercisesOfTheDay[1])}
@@ -530,7 +578,7 @@ export default function ProfileScreen({ navigation }) {
                   fontWeight: 500,
                 }}
               >
-                {Date + 3}
+                {DATE + 3}
               </Text>
               {displayMiniBars(ExcercisesOfTheDay[0])}
               {displayMiniBars(ExcercisesOfTheDay[1])}
@@ -556,7 +604,7 @@ export default function ProfileScreen({ navigation }) {
                   fontWeight: 500,
                 }}
               >
-                {Date + 4}
+                {DATE + 4}
               </Text>
               {displayMiniBars(ExcercisesOfTheDay[0])}
               {displayMiniBars(ExcercisesOfTheDay[1])}
@@ -582,7 +630,7 @@ export default function ProfileScreen({ navigation }) {
                   fontWeight: 500,
                 }}
               >
-                {Date + 5}
+                {DATE + 5}
               </Text>
               {displayMiniBars(ExcercisesOfTheDay[0])}
               {displayMiniBars(ExcercisesOfTheDay[1])}
@@ -608,7 +656,7 @@ export default function ProfileScreen({ navigation }) {
                   fontWeight: 500,
                 }}
               >
-                {Date + 6}
+                {DATE + 6}
               </Text>
               {displayMiniBars(ExcercisesOfTheDay[0])}
               {displayMiniBars(ExcercisesOfTheDay[1])}
@@ -619,17 +667,7 @@ export default function ProfileScreen({ navigation }) {
         </View>
 
         <View style={styles.calendar}>
-          <Calendar
-            markingType={"multi-dot"}
-            markedDates={{
-              "2021-8-9": {
-                dots: [BackExcercise],
-                selected: true,
-                selectedColor: "red",
-              },
-              "2021-8-10": { selected: true, marked: true },
-            }}
-          />
+          <Calendar markingType={"multi-dot"} markedDates={mark} />
         </View>
       </ScrollView>
 
@@ -815,7 +853,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
   },
-  excerciseOfDayDate: {
+  excerciseOfDayDATE: {
     flex: 0.45,
     width: "20%",
     textAlign: "center",

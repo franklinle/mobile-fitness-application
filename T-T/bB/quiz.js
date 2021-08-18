@@ -8,7 +8,7 @@ export async function setDB(text, num) {
     db.collection("users").doc(USERID).update({ height: text });
     db.collection("users")
       .doc(USERID)
-      .collection("Quiz")
+      .collection("personal")
       .doc("quizAnswers")
       .set({});
   } else if (num == 2) {
@@ -16,7 +16,7 @@ export async function setDB(text, num) {
   } else {
     db.collection("users")
       .doc(USERID)
-      .collection("Quiz")
+      .collection("personal")
       .doc("quizAnswers")
       .update({ [num]: text });
   }

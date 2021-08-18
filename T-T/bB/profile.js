@@ -11,11 +11,14 @@ export function setPR() {
   });
 }
 
-export function getProfile() {
-  db.collection("users")
-    .doc(userID)
+export function getName() {
+  return db
+    .collection("users")
+    .doc(user.uid)
     .get()
-    .then((doc) => {});
+    .then((doc) => {
+      return doc.data().username;
+    });
 }
 
 export function getHeight() {
@@ -35,6 +38,24 @@ export function getWeight() {
     .get()
     .then((doc) => {
       return doc.data().weight;
+    });
+}
+
+export function setProfileGoal(string) {
+  db.collection("users").doc(user.uid).collection("personal").doc("goal").set({
+    goal: string,
+  });
+}
+
+export function getProfileGoal(string) {
+  return db
+    .collection("users")
+    .doc(user.uid)
+    .collection("personal")
+    .doc("goal")
+    .get()
+    .then((doc) => {
+      return doc.data().goal;
     });
 }
 

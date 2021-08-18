@@ -5,11 +5,12 @@ export function randomQuote() {
   let max = Math.floor(100);
   let num = Math.floor(Math.random() * (max - min + 1) + min);
   let id = "Quote " + num;
-  db.collection("Quotes")
+  return db
+    .collection("Quotes")
     .doc(id)
     .get()
     .then((doc) => {
-      console.log(doc.data());
+      return doc.data();
     });
 }
 
