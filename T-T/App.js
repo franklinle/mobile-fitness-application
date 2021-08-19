@@ -47,7 +47,11 @@ function LandingPage({ navigation }) {
           style={styles.background}
         />
         {/** Changed AppHome to Section1 */}
-        <Pressable onPress={() => navigation.navigate("ProfileScreen")}>
+        <Pressable
+          onPress={() => {
+            console.log("nice");
+          }}
+        >
           <Image
             source={require("../T-T/assets/logo.png")}
             style={styles.pic}

@@ -11,6 +11,9 @@ export async function setDB(text, num) {
       .collection("personal")
       .doc("quizAnswers")
       .set({});
+    db.collection("users").doc(USERID).collection("personal").doc("goal").set({
+      goal: "Make a Goal!",
+    });
   } else if (num == 2) {
     db.collection("users").doc(USERID).update({ weight: text });
   } else {
