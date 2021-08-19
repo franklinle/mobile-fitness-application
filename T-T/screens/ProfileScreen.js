@@ -253,7 +253,7 @@ export default function ProfileScreen({ navigation }) {
     }
   }
 
-  let nextDays = ["2021-08-01", "2021-08-02"];
+  let nextDays = ["2021-08-01", "2021-08-09"];
   let ExcerciseHistory = [
     [BackExcercise, ArmExcercise],
     [BackExcercise, ArmExcercise],
@@ -329,10 +329,10 @@ export default function ProfileScreen({ navigation }) {
           />
         </View>
         <View style={{ textAlign: "center", marginTop: "11%" }}>
-          <Text style={{ color: "white", fontSize: 20, fontWeight: 500 }}>
+          <Text style={{ color: "white", fontSize: 20, fontWeight: "500" }}>
             {Username}
           </Text>
-          <Text style={{ color: "white", fontSize: 15, fontWeight: 400 }}>
+          <Text style={{ color: "white", fontSize: 15, fontWeight: "400" }}>
             {goal}
           </Text>
         </View>
@@ -430,7 +430,7 @@ export default function ProfileScreen({ navigation }) {
                   fontSize: 15,
                   color: "hsla(186, 33%, 32%, 1)",
                   marginTop: "25%",
-                  fontWeight: 400,
+                  fontWeight: "400",
                 }}
               >
                 {DayOfWeek + "\n"}
@@ -448,7 +448,7 @@ export default function ProfileScreen({ navigation }) {
                   style={{
                     fontSize: 50,
                     color: "hsla(186, 33%, 32%, 1)",
-                    fontWeight: 700,
+                    fontWeight: "700",
                   }}
                 >
                   {DATE + "\n"}
@@ -459,7 +459,7 @@ export default function ProfileScreen({ navigation }) {
                   marginTop: "40%",
                   fontSize: 15,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 400,
+                  fontWeight: "400",
                 }}
               >
                 {Month}
@@ -488,7 +488,7 @@ export default function ProfileScreen({ navigation }) {
                   paddingTop: "15%",
                   fontSize: 16,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {"Monday\n"}
@@ -497,7 +497,7 @@ export default function ProfileScreen({ navigation }) {
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {DATE}
@@ -514,7 +514,7 @@ export default function ProfileScreen({ navigation }) {
                   paddingTop: "15%",
                   fontSize: 16,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {"Tuesday\n"}
@@ -523,7 +523,7 @@ export default function ProfileScreen({ navigation }) {
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {DATE + 1}
@@ -540,7 +540,7 @@ export default function ProfileScreen({ navigation }) {
                   paddingTop: "15%",
                   fontSize: 14,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {"Wednesday\n"}
@@ -549,7 +549,7 @@ export default function ProfileScreen({ navigation }) {
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {DATE + 2}
@@ -566,7 +566,7 @@ export default function ProfileScreen({ navigation }) {
                   paddingTop: "15%",
                   fontSize: 16,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {"Thursday\n"}
@@ -575,7 +575,7 @@ export default function ProfileScreen({ navigation }) {
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {DATE + 3}
@@ -592,7 +592,7 @@ export default function ProfileScreen({ navigation }) {
                   paddingTop: "15%",
                   fontSize: 16,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {"Friday\n"}
@@ -601,7 +601,7 @@ export default function ProfileScreen({ navigation }) {
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {DATE + 4}
@@ -618,7 +618,7 @@ export default function ProfileScreen({ navigation }) {
                   paddingTop: "15%",
                   fontSize: 16,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {"Saturday\n"}
@@ -627,7 +627,7 @@ export default function ProfileScreen({ navigation }) {
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {DATE + 5}
@@ -644,7 +644,7 @@ export default function ProfileScreen({ navigation }) {
                   paddingTop: "15%",
                   fontSize: 16,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {"Sunday\n"}
@@ -653,7 +653,7 @@ export default function ProfileScreen({ navigation }) {
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
-                  fontWeight: 500,
+                  fontWeight: "500",
                 }}
               >
                 {DATE + 6}

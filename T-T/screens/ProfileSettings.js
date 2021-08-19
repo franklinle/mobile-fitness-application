@@ -31,7 +31,7 @@ export function ProfileSettings({ navigation }) {
             width: "95%",
             marginTop: "3%",
             borderWidth: 1,
-            bordercolor: "Black",
+            borderColor: "black",
           }}
           placeholder="Current Goal"
           onChangeText={(goal) => goalFunc(goal)}
@@ -46,10 +46,13 @@ export function ProfileSettings({ navigation }) {
             width: "95%",
             marginTop: "3%",
             borderWidth: 1,
-            bordercolor: "Black",
+            borderColor: "black",
           }}
           placeholder="yes"
         />
+        {/* <Pressable onPress={() => navigation.navigate("ProfileScreen")}>
+          <Text>Back to Profile</Text>
+        </Pressable> */}
       </View>
     </View>
   );
