@@ -46,8 +46,7 @@ const WeekOfButtons =(props) => {
 const Popupbutton = (props) =>{
     const [modalVisible, setModalVisible] = useState(false);
     //Each one represents whether the excercise is being done on that day. This is in order Monday,Tuesday...
-    console.log(props.name);
-
+    
     function setVisiblityAndExcercise(name){
         importedExcerciseTasks(name, affirmedDates)
         setModalVisible(!modalVisible)
