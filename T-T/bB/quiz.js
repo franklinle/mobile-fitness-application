@@ -16,6 +16,8 @@ export async function setDB(text, num) {
     });
   } else if (num == 2) {
     db.collection("users").doc(USERID).update({ weight: text });
+  } else if (num == 3) {
+    db.collection("users").doc(USERID).update({ age: text });
   } else {
     db.collection("users")
       .doc(USERID)

@@ -4,7 +4,13 @@ import { StyleSheet } from "react-native";
 import { Text, View, Image, ScrollView, Pressable } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
-import { getHeight, getWeight, getName, getProfileGoal } from "../bB/profile";
+import {
+  getHeight,
+  getWeight,
+  getName,
+  getProfileGoal,
+  BMI,
+} from "../bB/profile";
 
 import { fodder } from "../actions/user";
 
@@ -26,7 +32,7 @@ Implement ScrollView in a way that doesn't screw everything up but other than th
 Next steps include adding in the variables to be displayed and maybe even try to get the graph thing started
 */
 
-const NumOfActiveRoutines = 5;
+// const NumOfActiveRoutines = 5;
 // var NumOfWeight = "";
 // var NumOfHeight = "";
 
@@ -104,7 +110,8 @@ export default function ProfileScreen({ navigation }) {
   const [NumOfWeight, SetNumOfWeight] = useState("loading");
   const [NumOfHeight, SetNumOfHeight] = useState("loading");
   const [Username, SetUsername] = useState("loading");
-  const [goal, setGoal] = useState("loading");
+  const [goal, SetGoal] = useState("loading");
+  const [Bmi, SetBmi] = useState("loading");
 
   // won't work when we sign in -> log out -> sign into diff acc
   // restart expo -> auto log in doesn't work
@@ -120,9 +127,18 @@ export default function ProfileScreen({ navigation }) {
       SetUsername(a);
     });
     getProfileGoal().then((a) => {
-      setGoal(a);
+      SetGoal(a);
     });
+    var temp = BMI(NumOfHeight, NumOfWeight);
+    SetBmi(temp);
   }
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      x();
+    });
+    return unsubscribe;
+  }, [navigation]);
   x();
 
   //Change flex number if there is more than 5 excercises
@@ -130,7 +146,7 @@ export default function ProfileScreen({ navigation }) {
     switch (number) {
       case "Back":
         return {
-          flex: 0.15,
+          flex: 0.12,
           width: "90%",
           backgroundColor: "hsla(137, 59%, 55%, 1)",
           borderRadius: 5,
@@ -138,7 +154,7 @@ export default function ProfileScreen({ navigation }) {
         break;
       case "Legs":
         return {
-          flex: 0.15,
+          flex: 0.12,
           width: "90%",
           backgroundColor: "hsla(266, 70%, 66%, 1)",
           borderRadius: 5,
@@ -146,7 +162,7 @@ export default function ProfileScreen({ navigation }) {
         break;
       case "Arms":
         return {
-          flex: 0.15,
+          flex: 0.12,
           width: "90%",
           backgroundColor: "hsla(40, 73%, 71%, 1)",
           borderRadius: 5,
@@ -154,7 +170,7 @@ export default function ProfileScreen({ navigation }) {
         break;
       case "Abs":
         return {
-          flex: 0.15,
+          flex: 0.12,
           width: "90%",
           backgroundColor: "blue",
           borderRadius: 5,
@@ -162,7 +178,7 @@ export default function ProfileScreen({ navigation }) {
         break;
       case "Chest":
         return {
-          flex: 0.15,
+          flex: 0.12,
           width: "90%",
           backgroundColor: "orange",
           borderRadius: 5,
@@ -295,9 +311,9 @@ export default function ProfileScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.topBanner}>
-        {/* <Image source={require(imageSource)} style={{height:"90%", width: "16%", resizeMode: "stretch"}}/> */}
-      </View>
+      {/* <View style={styles.topBanner}>
+         <Image source={require(imageSource)} style={{height:"90%", width: "16%", resizeMode: "stretch"}}/> 
+      </View> */}
       <View style={styles.profileHeader}>
         <LinearGradient
           colors={["rgba(223, 238, 235, .8)", "transparent"]}
@@ -308,12 +324,12 @@ export default function ProfileScreen({ navigation }) {
         {/**Add a onPress to this pressable to get to Options page */}
         <Pressable
           style={{
-            top: "8%",
-            marginLeft: "90%",
-            width: "15%",
-            height: "25%",
-            position: "absolute",
+            height: "35%",
+            width: "20%",
+            left: "85%",
+            top: "5%",
             zIndex: 2,
+            position: "absolute",
           }}
           onPress={() => navigation.navigate("ProfileSettings")}
         >
@@ -329,10 +345,24 @@ export default function ProfileScreen({ navigation }) {
           />
         </View>
         <View style={{ textAlign: "center", marginTop: "11%" }}>
-          <Text style={{ color: "white", fontSize: 20, fontWeight: "500" }}>
+          <Text
+            style={{
+              color: "white",
+              fontSize: 20,
+              fontWeight: "500",
+              textAlign: "center",
+            }}
+          >
             {Username}
           </Text>
-          <Text style={{ color: "white", fontSize: 15, fontWeight: "400" }}>
+          <Text
+            style={{
+              color: "white",
+              fontSize: 15,
+              fontWeight: "400",
+              textAlign: "center",
+            }}
+          >
             {goal}
           </Text>
         </View>
@@ -429,37 +459,32 @@ export default function ProfileScreen({ navigation }) {
                 style={{
                   fontSize: 15,
                   color: "hsla(186, 33%, 32%, 1)",
-                  marginTop: "25%",
+                  marginTop: "17%",
                   fontWeight: "400",
+                  textAlign: "center",
                 }}
               >
-                {DayOfWeek + "\n"}
+                {DayOfWeek}
               </Text>
-              {/**Absolutely disgusting a absolute position */}
-              <View
-                style={{
-                  width: "100%",
-                  height: "30%",
-                  position: "absolute",
-                  top: "25%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 50,
-                    color: "hsla(186, 33%, 32%, 1)",
-                    fontWeight: "700",
-                  }}
-                >
-                  {DATE + "\n"}
-                </Text>
-              </View>
               <Text
                 style={{
-                  marginTop: "40%",
+                  fontSize: 50,
+                  color: "hsla(186, 33%, 32%, 1)",
+                  fontWeight: "700",
+                  height: "35%",
+                  textAlign: "center",
+                }}
+              >
+                {DATE + "\n"}
+              </Text>
+              <Text
+                style={{
+                  top: "3%",
+                  paddingTop: "5%",
                   fontSize: 15,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "400",
+                  textAlign: "center",
                 }}
               >
                 {Month}
@@ -476,7 +501,7 @@ export default function ProfileScreen({ navigation }) {
             </View>
           </View>
         </View>
-        <View style={{ alignItems: "center" }}>
+        <View style={{ alignItems: "center", backgroundColor: "white" }}>
           <ScrollView
             style={styles.dayScroll}
             horizontal={true}
@@ -489,15 +514,17 @@ export default function ProfileScreen({ navigation }) {
                   fontSize: 16,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
-                {"Monday\n"}
+                {"Monday"}
               </Text>
               <Text
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
                 {DATE}
@@ -515,15 +542,17 @@ export default function ProfileScreen({ navigation }) {
                   fontSize: 16,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
-                {"Tuesday\n"}
+                {"Tuesday"}
               </Text>
               <Text
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
                 {DATE + 1}
@@ -541,15 +570,17 @@ export default function ProfileScreen({ navigation }) {
                   fontSize: 14,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
-                {"Wednesday\n"}
+                {"Wednesday"}
               </Text>
               <Text
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
                 {DATE + 2}
@@ -559,7 +590,6 @@ export default function ProfileScreen({ navigation }) {
               {displayMiniBars(ExcercisesOfTheDay[2])}
               {displayMiniBars(ExcercisesOfTheDay[3])}
             </View>
-
             <View style={styles.daysOfWeek}>
               <Text
                 style={{
@@ -567,15 +597,17 @@ export default function ProfileScreen({ navigation }) {
                   fontSize: 16,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
-                {"Thursday\n"}
+                {"Thursday"}
               </Text>
               <Text
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
                 {DATE + 3}
@@ -593,15 +625,17 @@ export default function ProfileScreen({ navigation }) {
                   fontSize: 16,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
-                {"Friday\n"}
+                {"Friday"}
               </Text>
               <Text
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
                 {DATE + 4}
@@ -619,15 +653,17 @@ export default function ProfileScreen({ navigation }) {
                   fontSize: 16,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
-                {"Saturday\n"}
+                {"Saturday"}
               </Text>
               <Text
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
                 {DATE + 5}
@@ -645,15 +681,17 @@ export default function ProfileScreen({ navigation }) {
                   fontSize: 16,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
-                {"Sunday\n"}
+                {"Sunday"}
               </Text>
               <Text
                 style={{
                   fontSize: 30,
                   color: "hsla(186, 33%, 32%, 1)",
                   fontWeight: "500",
+                  textAlign: "center",
                 }}
               >
                 {DATE + 6}
@@ -671,7 +709,7 @@ export default function ProfileScreen({ navigation }) {
         </View>
       </ScrollView>
 
-      {/**Where the Height,Weight and active routines are displayed */}
+      {/**Where the Height,Weight and BMI are displayed */}
       <View style={styles.quickStats}>
         <View style={styles.quickStatsChart}>
           <View style={styles.activeRoutines}>
@@ -683,10 +721,17 @@ export default function ProfileScreen({ navigation }) {
                 textAlign: "center",
               }}
             >
-              {NumOfActiveRoutines + "\n"}
+              {Bmi}
             </Text>
-            <Text style={{ fontSize: 13, color: "hsla(186, 33%, 32%, 1)" }}>
-              Active Routines
+            <Text
+              style={{
+                fontSize: 13,
+                color: "hsla(186, 33%, 32%, 1)",
+                marginLeft: "5%",
+                textAlign: "center",
+              }}
+            >
+              BMI
             </Text>
           </View>
           <View style={styles.verticalLine2} />
@@ -696,11 +741,18 @@ export default function ProfileScreen({ navigation }) {
                 marginTop: "3%",
                 fontSize: 25,
                 color: "hsla(186, 33%, 32%, 1)",
+                textAlign: "center",
               }}
             >
-              {NumOfWeight + "\n"}
+              {NumOfWeight}
             </Text>
-            <Text style={{ fontSize: 13, color: "hsla(186, 33%, 32%, 1)" }}>
+            <Text
+              style={{
+                fontSize: 13,
+                color: "hsla(186, 33%, 32%, 1)",
+                textAlign: "center",
+              }}
+            >
               Weight
             </Text>
           </View>
@@ -714,9 +766,15 @@ export default function ProfileScreen({ navigation }) {
                 textAlign: "center",
               }}
             >
-              {NumOfHeight + '"\n'}
+              {NumOfHeight}
             </Text>
-            <Text style={{ fontSize: 13, color: "hsla(186, 33%, 32%, 1)" }}>
+            <Text
+              style={{
+                fontSize: 13,
+                color: "hsla(186, 33%, 32%, 1)",
+                textAlign: "center",
+              }}
+            >
               Height
             </Text>
           </View>
@@ -757,7 +815,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     position: "absolute",
-    top: "32%",
+    top: "28%",
   },
   quickStatsChart: {
     backgroundColor: "white",
@@ -775,34 +833,37 @@ const styles = StyleSheet.create({
   },
   activeRoutines: {
     flex: 0.3,
-    top: "10%",
+    top: "3%",
     width: "20%",
+    height: "50%",
     textAlign: "center",
   },
   weight: {
     flex: 0.3,
-    top: "10%",
+    top: "3%",
     width: "20%",
+    height: "50%",
     textAlign: "center",
   },
   height: {
     flex: 0.3,
-    top: "10%",
+    top: "3%",
     width: "20%",
+    height: "50%",
     textAlign: "center",
   },
   verticalLine: {
-    height: "80%",
+    height: "60%",
     top: "5%",
     backgroundColor: "hsla(186, 33%, 32%, 0.3)",
     flex: 0.0056,
     width: 1,
   },
   verticalLine2: {
-    height: "80%",
+    height: "60%",
     top: "5%",
     backgroundColor: "hsla(186, 33%, 32%, 0.3)",
-    flex: 0.0056,
+    flex: 0.006,
     width: 1,
   },
 
@@ -815,7 +876,8 @@ const styles = StyleSheet.create({
     display: "flex",
   },
   excercise: {
-    flex: 0.4,
+    flex: 0.5,
+    height: "100%",
     flexDirection: "row",
     marginTop: "16%",
   },
@@ -840,7 +902,7 @@ const styles = StyleSheet.create({
   },
   excerciseOfDay: {
     //I probably want to change excercise of the Day into another flexbox so I can include Key if needed
-    flex: 5,
+    flex: 4,
     marginRight: "3%",
     height: "90%",
     width: "100%",
@@ -876,7 +938,7 @@ const styles = StyleSheet.create({
     flex: 2,
     flexDirection: "row",
     width: "100%",
-    height: "20%",
+    height: "100%",
   },
   daysOfWeek: {
     backgroundColor: "#D6E4E2",

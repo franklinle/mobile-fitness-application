@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Switch, Button, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Switch,
+  Button,
+  TextInput,
+} from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import { LinearGradient } from "expo-linear-gradient";
 import { setDB } from "../bB/quiz";
@@ -15,28 +22,32 @@ it on the dropdown menu, hence the workaround. IOS may not have this issue and t
 export function Section1({ navigation }) {
   let height;
   let weight;
-  let weight2;
+  let finHeight;
+  let height2;
   let age;
-  
 
   function weightFunc(string) {
     weight = string;
-    setDB(string,2)
+    setDB(string, 2);
   }
 
-  function weight2Func(string) {
-    weight = string;
-    setDB(string,25)
+  async function height2Func(string) {
+    height2 = string;
   }
 
-  function heightFunc(string){
+  async function heightFunc(string) {
     height = string;
-    setDB(string,1)
   }
 
-  function ageFunc(string){
+  function ageFunc(string) {
     age = string;
-    setDB(string,3)
+    setDB(string, 3);
+  }
+
+  function navi() {
+    finHeight = `${height}'${height2}`;
+    setDB(finHeight, 1);
+    navigation.navigate("Question2");
   }
 
   return (
@@ -49,38 +60,36 @@ export function Section1({ navigation }) {
         Welcome Please input your measurements!
       </Text>
       <View style={styles.dropdown}>
-        <Text style={styles.dropTitle}>Height</Text>
+        <Text style={styles.dropTitle}>Weight</Text>
         <TextInput
           style={{
             height: 40,
             width: "25%",
             marginTop: "3%",
             borderWidth: 1,
-            bordercolor: "Black",
-            keyboardType: "numeric",
+            borderColor: "black",
             textAlign: "center",
           }}
-          placeholder="Height"
-          onChangeText={(goal) => heightFunc(goal)}
-          defaultValue={height}
+          placeholder="Weight"
+          onChangeText={(goal) => weightFunc(goal)}
+          defaultValue={weight}
         />
-        <Text style={styles.dropTitle}>Weight</Text>
-        <View style={{flexDirection:"row",}}>
+        <Text style={styles.dropTitle}>Height</Text>
+        <View style={{ flexDirection: "row" }}>
           <TextInput
             style={{
               height: 40,
               width: "25%",
               marginTop: "3%",
               borderWidth: 1,
-              bordercolor: "Black",
-              keyboardType: "numeric",
-              flex:.2,
+              borderColor: "black",
+              flex: 0.2,
               textAlign: "center",
-              marginRight: "5%"
+              marginRight: "5%",
             }}
             placeholder="ft"
-            onChangeText={(goal) => weightFunc(goal)}
-            defaultValue={weight}
+            onChangeText={(goal) => heightFunc(goal)}
+            defaultValue={height}
           />
           <TextInput
             style={{
@@ -88,14 +97,13 @@ export function Section1({ navigation }) {
               width: "25%",
               marginTop: "3%",
               borderWidth: 1,
-              bordercolor: "Black",
+              borderColor: "black",
               textAlign: "center",
-              keyboardType: "numeric",
-              flex:.2
+              flex: 0.2,
             }}
             placeholder="in"
-            onChangeText={(goal) => weight2Func(goal)}
-            defaultValue={weight2}
+            onChangeText={(goal) => height2Func(goal)}
+            defaultValue={height2}
           />
         </View>
         <Text style={styles.dropTitle}>Age</Text>
@@ -105,8 +113,7 @@ export function Section1({ navigation }) {
             width: "25%",
             marginTop: "3%",
             borderWidth: 1,
-            bordercolor: "Black",
-            keyboardType: "numeric",
+            borderColor: "black",
             textAlign: "center",
           }}
           placeholder="Age"
@@ -118,13 +125,46 @@ export function Section1({ navigation }) {
         <Button
           color={"rgb(81, 130, 135)"}
           title="Next"
-          onPress={() => navigation.navigate("Question2")}
+          onPress={() => navi()}
         />
       </View>
       <StatusBar style="auto" />
     </View>
   );
 }
+
+/* const height = [
+  {
+    label: "6'2",
+    value: "6'2",
+  },
+  {
+    label: "5'2",
+    value: "5'2",
+  },
+  {
+    label: "3'6",
+    value: "3'6",
+  },
+];
+
+const weight = [
+  {
+    label: "135lbs",
+    value: 135,
+  },
+  {
+    label: "65lbs",
+    value: 65,
+  },
+];
+
+const age = [
+  {
+    label: "15yrs",
+    value: 15,
+  },
+]; */
 
 //Change colors to match whether its metric or not + labels
 const styles = StyleSheet.create({

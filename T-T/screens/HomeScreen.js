@@ -84,13 +84,6 @@ export default function HomeScreen() {
       <View style={styles.tasksWrapper}>
         <Text style={styles.sectionTitle}>Today's Exercises</Text>
         <View style={styles.items}>
-          {arrayOfExcercises.map((item, index) => {
-            return (
-              <TouchableOpacity key={index} onPress={() => completeTask(index)}>
-                <Task text={item} />
-              </TouchableOpacity>
-            );
-          })}
           {taskItems.map((item, index) => {
             return (
               <TouchableOpacity key={index} onPress={() => completeTask(index)}>
