@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     width: "50%",
     marginHorizontal: "20%",
     justifyContent: "space-between",
+    zIndex: 2,
   },
   question: {
     marginTop: "45%",
@@ -57,7 +58,6 @@ const styles = StyleSheet.create({
     color: "hsla(186, 33%, 32%, 1)",
     width: "70%",
     marginBottom: "20%",
-    zIndex: 2,
   },
   background: {
     position: "absolute",
