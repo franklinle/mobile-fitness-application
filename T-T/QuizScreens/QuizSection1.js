@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Switch, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Switch,
+  Button,
+  TextInput,
+} from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import { LinearGradient } from "expo-linear-gradient";
 import { setDB } from "../bB/quiz";
@@ -13,8 +20,35 @@ styling for displaying the selected option is, I believe undefined, therefore on
 it on the dropdown menu, hence the workaround. IOS may not have this issue and therefore may not be a problem. idk
 */
 export function Section1({ navigation }) {
-  const [isEnabled, setEnabled] = useState(false);
-  const toggleSystem = () => setEnabled((prev) => !prev);
+  let height;
+  let weight;
+  let finHeight;
+  let height2;
+  let age;
+
+  function weightFunc(string) {
+    weight = string;
+    setDB(string, 2);
+  }
+
+  async function height2Func(string) {
+    height2 = string;
+  }
+
+  async function heightFunc(string) {
+    height = string;
+  }
+
+  function ageFunc(string) {
+    age = string;
+    setDB(string, 3);
+  }
+
+  function navi() {
+    finHeight = `${height}'${height2}`;
+    setDB(finHeight, 1);
+    navigation.navigate("Question2");
+  }
 
   return (
     <View style={styles.container}>
@@ -25,45 +59,73 @@ export function Section1({ navigation }) {
       <Text style={styles.question}>
         Welcome Please input your measurements!
       </Text>
-      <View style={styles.toggle}>
-        <Text style={styles.dropTitle}>Metric System</Text>
-        <Switch
-          onValueChange={toggleSystem}
-          value={isEnabled}
-          style={{
-            marginRight: "13%",
-            transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }],
-          }}
-        />
-      </View>
       <View style={styles.dropdown}>
-        <Text style={styles.dropTitle}>Height</Text>
-        <RNPickerSelect
-          style={{ inputAndroid: { color: "black" } }}
-          //useNativeAndroidPickerStyle={false}
-          onValueChange={(value) => setDB(value, 1)}
-          items={height}
-        />
         <Text style={styles.dropTitle}>Weight</Text>
-        <RNPickerSelect
-          style={{ inputAndroid: { color: "black" } }}
-          //useNativeAndroidPickerStyle={false}
-          onValueChange={(value) => setDB(value, 2)}
-          items={weight}
+        <TextInput
+          style={{
+            height: 40,
+            width: "25%",
+            marginTop: "3%",
+            borderWidth: 1,
+            borderColor: "black",
+            textAlign: "center",
+          }}
+          placeholder="Weight"
+          onChangeText={(goal) => weightFunc(goal)}
+          defaultValue={weight}
         />
+        <Text style={styles.dropTitle}>Height</Text>
+        <View style={{ flexDirection: "row" }}>
+          <TextInput
+            style={{
+              height: 40,
+              width: "25%",
+              marginTop: "3%",
+              borderWidth: 1,
+              borderColor: "black",
+              flex: 0.2,
+              textAlign: "center",
+              marginRight: "5%",
+            }}
+            placeholder="ft"
+            onChangeText={(goal) => heightFunc(goal)}
+            defaultValue={height}
+          />
+          <TextInput
+            style={{
+              height: 40,
+              width: "25%",
+              marginTop: "3%",
+              borderWidth: 1,
+              borderColor: "black",
+              textAlign: "center",
+              flex: 0.2,
+            }}
+            placeholder="in"
+            onChangeText={(goal) => height2Func(goal)}
+            defaultValue={height2}
+          />
+        </View>
         <Text style={styles.dropTitle}>Age</Text>
-        <RNPickerSelect
-          style={{ inputAndroid: { color: "black" } }}
-          //useNativeAndroidPickerStyle={false}
-          onValueChange={(value) => setDB(value, 3)}
-          items={age}
+        <TextInput
+          style={{
+            height: 40,
+            width: "25%",
+            marginTop: "3%",
+            borderWidth: 1,
+            borderColor: "black",
+            textAlign: "center",
+          }}
+          placeholder="Age"
+          onChangeText={(goal) => ageFunc(goal)}
+          defaultValue={age}
         />
       </View>
       <View style={styles.submitButton}>
         <Button
           color={"rgb(81, 130, 135)"}
           title="Next"
-          onPress={() => navigation.navigate("Question2")}
+          onPress={() => navi()}
         />
       </View>
       <StatusBar style="auto" />
@@ -71,7 +133,7 @@ export function Section1({ navigation }) {
   );
 }
 
-const height = [
+/* const height = [
   {
     label: "6'2",
     value: "6'2",
@@ -102,7 +164,7 @@ const age = [
     label: "15yrs",
     value: 15,
   },
-];
+]; */
 
 //Change colors to match whether its metric or not + labels
 const styles = StyleSheet.create({

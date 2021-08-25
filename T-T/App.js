@@ -35,8 +35,11 @@ import { DaysOfWorkout } from "./QuizScreens/EndQuestion1";
 import { LengthOfWorkout } from "./QuizScreens/EndQuestion2";
 import { TimeFrameOfWorkOut } from "./QuizScreens/EndQuestion3";
 import { ProfileSettings } from "./screens/ProfileSettings";
+import Popupbutton from "./Components/ExcercisePopup";
 
 import "./actions/user";
+
+const PUSHUP = "PUSHUP";
 
 function LandingPage({ navigation }) {
   return (
@@ -69,6 +72,7 @@ function LandingPage({ navigation }) {
         >
           <Text style={styles.buttonText}> Log in </Text>
         </Pressable>
+        <Popupbutton name={PUSHUP}/>
       </Provider>
     </View>
   );

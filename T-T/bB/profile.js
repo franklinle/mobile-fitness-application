@@ -1,14 +1,13 @@
 import { db } from "../config/Firebase";
 import { fodder, signup, user } from "../actions/user";
 
-export function setPR() {
-  db.collection("").doc("").set({
-    bench: "",
-    pushUp: "",
-    sitUp: "",
-    squats: "",
-    water: "",
-  });
+export function BMI(height, weight) {
+  var splitHeight = height.split("'");
+  var newHeight = splitHeight[0] * 12 + Number(splitHeight[1]);
+  var meters = newHeight / 39.37;
+  var kg = weight / 2.205;
+  var x = kg / (meters * meters);
+  return Math.round(x * 10) / 10;
 }
 
 export function getName() {
@@ -31,6 +30,12 @@ export function getHeight() {
     });
 }
 
+export function setNewHeight(height) {
+  db.collection("users").doc(user.uid).update({
+    height: height,
+  });
+}
+
 export function getWeight() {
   return db
     .collection("users")
@@ -39,6 +44,12 @@ export function getWeight() {
     .then((doc) => {
       return doc.data().weight;
     });
+}
+
+export function setNewWeight(weight) {
+  db.collection("users").doc(user.uid).update({
+    weight: weight,
+  });
 }
 
 export function setProfileGoal(string) {
@@ -56,23 +67,5 @@ export function getProfileGoal(string) {
     .get()
     .then((doc) => {
       return doc.data().goal;
-    });
-}
-
-export function getPR() {
-  db.collection("")
-    .doc("")
-    .get()
-    .then((doc) => {
-      console.log(doc.data());
-    });
-}
-
-export function getWorkout() {
-  db.collection("users")
-    .doc(userID)
-    .get()
-    .then((doc) => {
-      console.log(doc.data());
     });
 }
